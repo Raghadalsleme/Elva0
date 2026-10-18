@@ -1,0 +1,45 @@
+{#
+| Variable                  | Type     | Description                                                        |
+|---------------------------|----------|--------------------------------------------------------------------|
+| component                 | object   | Merchant settings for fields from twilight.json `components` entry |
+| component.title           | ?string  |                                                                    |
+| component.subtitle        | ?string  |                                                                    |
+| component.items           | object[] | Collection cards                                                   |
+| component.items[].image   | ?string  | Portrait image (900×1200)                                          |
+| component.items[].title   | ?string  |                                                                    |
+| component.items[].label   | ?string  | Small call-to-action line under the title                          |
+| component.items[].url     | ?string  |                                                                    |
+| position                  | int      | Sorting number start from zero                                     |
+ELVA collections — portrait cards with a hairline frame that draws in on hover.
+#}
+{% set count = component.items|length %}
+{% set cols = count > 4 ? 4 : (count < 2 ? 2 : count) %}
+<section component-id="{{ componentId }}" data-testid="store-home-elva-collections" class="s-block elva-collections container">
+    {% if component.title or component.subtitle %}
+        <div class="elva-head">
+            {% if component.title %}<h2>{{ component.title }}</h2>{% endif %}
+            <div class="elva-ornament" aria-hidden="true"><span></span></div>
+            {% if component.subtitle %}<p>{{ component.subtitle }}</p>{% endif %}
+        </div>
+    {% endif %}
+
+    <div class="elva-collections__grid" style="--elva-cols: {{ cols }}">
+        {% for item in component.items %}
+            <a href="{{ item.url ? item.url : '#' }}" class="elva-card{{ item.image ? '' : ' elva-card--empty' }}" aria-label="{{ item.title ? item.title : 'collection-' ~ loop.index }}">
+                {% if item.image %}
+                    <div class="elva-card__media">
+                        <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy" width="900" height="1200">
+                    </div>
+                    <div class="elva-card__shade"></div>
+                {% else %}
+                    <div class="elva-card__placeholder" aria-hidden="true">E</div>
+                {% endif %}
+                <div class="elva-card__frame" aria-hidden="true"></div>
+                <div class="elva-card__label">
+                    {% if item.title %}<h3>{{ item.title }}</h3>{% endif %}
+                    {% if item.label %}<span>{{ item.label }}</span>{% endif %}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</section>

@@ -1,0 +1,61 @@
+{#
+| Variable                 | Type    | Description                                                         |
+|--------------------------|---------|---------------------------------------------------------------------|
+| component                | object  | Merchant settings for fields from twilight.json `components` entry  |
+| component.image          | ?string | Desktop background image (1920×900)                                 |
+| component.mobile_image   | ?string | Optional portrait image for phones (800×1100)                       |
+| component.eyebrow        | ?string | Small wide-tracked line above the title                             |
+| component.title          | ?string | Large serif title                                                   |
+| component.subtitle       | ?string |                                                                     |
+| component.button_text    | ?string |                                                                     |
+| component.url            | ?string |                                                                     |
+| component.full_height    | bool    | Fill the screen height                                              |
+| component.show_ornaments | bool    | Show the logo-style frame and rules                                 |
+| position                 | int     | Sorting number start from zero                                      |
+ELVA hero — plum banner with the double hairline frame from the ELVA logo.
+Works with or without an image (falls back to the plum brand background).
+#}
+<section component-id="{{ componentId }}" data-testid="store-home-elva-hero"
+         class="s-block s-block--full-bg elva-hero{{ component.full_height ? ' elva-hero--full' : '' }}">
+    {% if component.image %}
+        <div class="elva-hero__media">
+            <picture>
+                {% if component.mobile_image %}
+                    <source media="(max-width: 767px)" srcset="{{ component.mobile_image }}">
+                {% endif %}
+                <img src="{{ component.image }}" alt="{{ component.title }}" fetchpriority="{{ position == 0 ? 'high' : 'auto' }}" loading="{{ position == 0 ? 'eager' : 'lazy' }}" width="1920" height="900">
+            </picture>
+        </div>
+        <div class="elva-hero__shade"></div>
+    {% endif %}
+
+    {% if component.show_ornaments %}
+        <div class="elva-hero__frame" aria-hidden="true"></div>
+    {% endif %}
+
+    <div class="container elva-hero__content">
+        {% if component.show_ornaments %}
+            <div class="elva-dots" aria-hidden="true"><b></b><i></i><em></em><i></i><b></b></div>
+        {% endif %}
+
+        {% if component.title %}
+            <h2 class="elva-hero__title">{{ component.title }}</h2>
+        {% endif %}
+
+        {% if component.eyebrow %}
+            <p class="elva-eyebrow">{{ component.eyebrow }}</p>
+        {% endif %}
+
+        {% if component.show_ornaments %}
+            <div class="elva-ornament" aria-hidden="true"><span></span></div>
+        {% endif %}
+
+        {% if component.subtitle %}
+            <p class="elva-hero__subtitle">{{ component.subtitle }}</p>
+        {% endif %}
+
+        {% if component.button_text and component.url %}
+            <a href="{{ component.url }}" class="elva-btn elva-btn--cream">{{ component.button_text }}</a>
+        {% endif %}
+    </div>
+</section>

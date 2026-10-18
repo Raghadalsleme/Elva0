@@ -1,0 +1,26 @@
+{#
+| Variable                | Type     | Description                                                        |
+|-------------------------|----------|--------------------------------------------------------------------|
+| component               | object   | Merchant settings for fields from twilight.json `components` entry |
+| component.items         | object[] |                                                                    |
+| component.items[].icon  | string   | Salla icon class, ex: sicon-shipping-fast                          |
+| component.items[].title | ?string  |                                                                    |
+| component.items[].text  | ?string  |                                                                    |
+| position                | int      | Sorting number start from zero                                     |
+ELVA promises — plum band of store promises (shipping, returns, quality...).
+#}
+{% set count = component.items|length %}
+{% set cols = count > 4 ? 4 : (count < 2 ? 2 : count) %}
+<section component-id="{{ componentId }}" data-testid="store-home-elva-promises" class="s-block s-block--full-bg elva-promises">
+    <div class="container">
+        <ul class="elva-promises__list" style="--elva-cols: {{ cols }}">
+            {% for item in component.items %}
+                <li class="elva-promises__item">
+                    {% if item.icon %}<i class="{{ item.icon }}" aria-hidden="true"></i>{% endif %}
+                    {% if item.title %}<h3>{{ item.title }}</h3>{% endif %}
+                    {% if item.text %}<p>{{ item.text }}</p>{% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
