@@ -13,7 +13,7 @@ ELVA promises — plum band of store promises (shipping, returns, quality...).
 {% set cols = count > 4 ? 4 : (count < 2 ? 2 : count) %}
 <section component-id="{{ componentId }}" data-testid="store-home-elva-promises" class="s-block s-block--full-bg elva-promises">
     <div class="container">
-        <ul class="elva-promises__list" style="--elva-cols: {{ cols }}">
+        <ul class="elva-promises__list" style="--elva-cols: {{ cols }}" data-elva-stagger="0.12">
             {% for item in component.items %}
                 <li class="elva-promises__item">
                     {% if item.icon %}<i class="{{ item.icon }}" aria-hidden="true"></i>{% endif %}

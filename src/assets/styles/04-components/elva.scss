@@ -318,16 +318,35 @@
   }
 
   &__media {
+    @apply absolute inset-0 overflow-hidden;
+  }
+
+  &__slide {
     @apply absolute inset-0;
+    opacity: 0;
+
+    &:first-child {
+      opacity: 1;
+    }
+
+    picture,
+    img {
+      @apply block w-full h-full;
+    }
 
     img {
-      @apply w-full h-full object-cover;
+      @apply object-cover;
     }
+  }
+
+  &__video {
+    @apply absolute inset-0 w-full h-full object-cover;
   }
 
   &__shade {
     @apply absolute inset-0;
-    background: linear-gradient(180deg, rgba(51, 18, 43, 0.35) 0%, rgba(51, 18, 43, 0.6) 100%);
+    background:
+      linear-gradient(180deg, rgba(51, 18, 43, 0.45) 0%, rgba(51, 18, 43, 0.2) 40%, rgba(51, 18, 43, 0.7) 100%);
   }
 
   /* double hairline frame, straight from the logo */

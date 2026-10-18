@@ -1,0 +1,43 @@
+{#
+| Variable                  | Type     | Description                                                        |
+|---------------------------|----------|--------------------------------------------------------------------|
+| component                 | object   | Merchant settings for fields from twilight.json `components` entry |
+| component.eyebrow         | ?string  |                                                                    |
+| component.text            | ?string  | Statement; wrap a word in *asterisks* to accent it                 |
+| component.dark            | bool     | Plum background                                                    |
+| component.show_counters   | bool     |                                                                    |
+| component.counters        | object[] |                                                                    |
+| component.counters[].number | string | ex: +5000, %100, 4.9 (Arabic digits work too)                      |
+| component.counters[].label  | string |                                                                    |
+| position                  | int      | Sorting number start from zero                                     |
+ELVA statement — words light up one by one as the section scrolls into view, then numbers count up.
+#}
+{% set counters = component.counters|default([]) %}
+<section component-id="{{ componentId }}" data-testid="store-home-elva-statement"
+         class="s-block elva-statement{{ component.dark ? ' s-block--full-bg elva-statement--dark' : '' }}">
+    <div class="container">
+        {% if component.eyebrow %}
+            <div class="elva-statement__head" data-elva-reveal>
+                <p class="elva-eyebrow">{{ component.eyebrow }}</p>
+                <div class="elva-ornament elva-ornament--start" aria-hidden="true"><span></span></div>
+            </div>
+        {% endif %}
+
+        {% if component.text %}
+            <p class="elva-statement__text" data-elva-statement data-text="{{ component.text|e('html_attr') }}">{{ component.text|replace({'*': ''}) }}</p>
+        {% endif %}
+
+        {% if component.show_counters and counters|length %}
+            <ul class="elva-statement__counters" style="--elva-cols: {{ counters|length > 4 ? 4 : counters|length }}" data-elva-stagger="0.12">
+                {% for item in counters %}
+                    {% if item.number %}
+                        <li class="elva-statement__counter">
+                            <span class="elva-statement__number" data-elva-count>{{ item.number }}</span>
+                            {% if item.label %}<span class="elva-statement__label">{{ item.label }}</span>{% endif %}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</section>

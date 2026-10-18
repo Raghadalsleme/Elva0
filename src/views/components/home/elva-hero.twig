@@ -2,9 +2,12 @@
 | Variable                 | Type    | Description                                                         |
 |--------------------------|---------|---------------------------------------------------------------------|
 | component                | object  | Merchant settings for fields from twilight.json `components` entry  |
-| component.image          | ?string | Desktop background image (1920×900)                                 |
-| component.mobile_image   | ?string | Optional portrait image for phones (800×1100)                       |
-| component.eyebrow        | ?string | Small wide-tracked line above the title                             |
+| component.image          | ?string | Slide 1 / desktop background (1920×900)                             |
+| component.image_2        | ?string | Slide 2 (optional)                                                  |
+| component.image_3        | ?string | Slide 3 (optional)                                                  |
+| component.mobile_image   | ?string | Optional portrait version of slide 1 for phones (800×1100)          |
+| component.video          | ?string | Optional MP4 url, plays muted in a loop instead of the slides       |
+| component.eyebrow        | ?string | Small wide-tracked line under the title                             |
 | component.title          | ?string | Large serif title                                                   |
 | component.subtitle       | ?string |                                                                     |
 | component.button_text    | ?string |                                                                     |
@@ -12,21 +15,43 @@
 | component.full_height    | bool    | Fill the screen height                                              |
 | component.show_ornaments | bool    | Show the logo-style frame and rules                                 |
 | position                 | int     | Sorting number start from zero                                      |
-ELVA hero — plum banner with the double hairline frame from the ELVA logo.
-Works with or without an image (falls back to the plum brand background).
+ELVA hero — cinematic: slides crossfade with a slow zoom (or a looping video) behind the
+logo's double frame; title letters/words rise in. Falls back to the plum brand background.
 #}
-<section component-id="{{ componentId }}" data-testid="store-home-elva-hero"
-         class="s-block s-block--full-bg elva-hero{{ component.full_height ? ' elva-hero--full' : '' }}">
-    {% if component.image %}
-        <div class="elva-hero__media">
-            <picture>
-                {% if component.mobile_image %}
-                    <source media="(max-width: 767px)" srcset="{{ component.mobile_image }}">
-                {% endif %}
-                <img src="{{ component.image }}" alt="{{ component.title }}" fetchpriority="{{ position == 0 ? 'high' : 'auto' }}" loading="{{ position == 0 ? 'eager' : 'lazy' }}" width="1920" height="900">
-            </picture>
+{% set video = component.video|default('')|trim %}
+{% set slides = [] %}
+{% for img in [component.image|default(''), component.image_2|default(''), component.image_3|default('')] %}
+    {% if img %}{% set slides = slides|merge([img]) %}{% endif %}
+{% endfor %}
+{% set has_media = video or slides|length %}
+
+<section component-id="{{ componentId }}" data-testid="store-home-elva-hero" data-elva-hero data-interval="6500"
+         class="s-block s-block--full-bg elva-hero{{ component.full_height ? ' elva-hero--full' : '' }}{{ has_media ? ' elva-hero--media' : '' }}">
+    {% if has_media %}
+        <div class="elva-hero__media" aria-hidden="true">
+            {% if video %}
+                <video class="elva-hero__video" autoplay muted loop playsinline preload="metadata"
+                       {% if slides|length %}poster="{{ slides|first }}"{% endif %}>
+                    <source src="{{ video }}" type="video/mp4">
+                </video>
+            {% else %}
+                {% for img in slides %}
+                    <div class="elva-hero__slide{{ loop.first ? ' is-active' : '' }}">
+                        <picture>
+                            {% if loop.first and component.mobile_image|default('') %}
+                                <source media="(max-width: 767px)" srcset="{{ component.mobile_image }}">
+                            {% endif %}
+                            <img src="{{ img }}" alt="" width="1920" height="900"
+                                 loading="{{ loop.first and position == 0 ? 'eager' : 'lazy' }}"
+                                 {% if loop.first and position == 0 %}fetchpriority="high"{% endif %}>
+                        </picture>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
         <div class="elva-hero__shade"></div>
+    {% else %}
+        <div class="elva-hero__glow" aria-hidden="true"></div>
     {% endif %}
 
     {% if component.show_ornaments %}
@@ -35,19 +60,19 @@ Works with or without an image (falls back to the plum brand background).
 
     <div class="container elva-hero__content">
         {% if component.show_ornaments %}
-            <div class="elva-dots" aria-hidden="true"><b></b><i></i><em></em><i></i><b></b></div>
+            <div class="elva-dots elva-hero__dots-rule" aria-hidden="true"><b></b><i></i><em></em><i></i><b></b></div>
         {% endif %}
 
         {% if component.title %}
-            <h2 class="elva-hero__title">{{ component.title }}</h2>
+            <h2 class="elva-hero__title" data-elva-split>{{ component.title }}</h2>
         {% endif %}
 
         {% if component.eyebrow %}
-            <p class="elva-eyebrow">{{ component.eyebrow }}</p>
+            <p class="elva-eyebrow elva-hero__eyebrow">{{ component.eyebrow }}</p>
         {% endif %}
 
         {% if component.show_ornaments %}
-            <div class="elva-ornament" aria-hidden="true"><span></span></div>
+            <div class="elva-ornament elva-hero__ornament" aria-hidden="true"><span></span></div>
         {% endif %}
 
         {% if component.subtitle %}
@@ -55,7 +80,20 @@ Works with or without an image (falls back to the plum brand background).
         {% endif %}
 
         {% if component.button_text and component.url %}
-            <a href="{{ component.url }}" class="elva-btn elva-btn--cream">{{ component.button_text }}</a>
+            <a href="{{ component.url }}" class="elva-btn elva-btn--cream elva-hero__cta">{{ component.button_text }}</a>
         {% endif %}
     </div>
+
+    {% if not video and slides|length > 1 %}
+        <div class="elva-hero__pager">
+            {% for img in slides %}
+                <button type="button" class="elva-hero__dot{{ loop.first ? ' is-active' : '' }}"
+                        aria-label="{{ loop.index }}" aria-current="{{ loop.first ? 'true' : 'false' }}"></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if component.full_height %}
+        <span class="elva-hero__scroll" aria-hidden="true"><i></i></span>
+    {% endif %}
 </section>

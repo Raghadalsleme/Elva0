@@ -16,14 +16,14 @@ ELVA collections — portrait cards with a hairline frame that draws in on hover
 {% set cols = count > 4 ? 4 : (count < 2 ? 2 : count) %}
 <section component-id="{{ componentId }}" data-testid="store-home-elva-collections" class="s-block elva-collections container">
     {% if component.title or component.subtitle %}
-        <div class="elva-head">
+        <div class="elva-head" data-elva-reveal>
             {% if component.title %}<h2>{{ component.title }}</h2>{% endif %}
             <div class="elva-ornament" aria-hidden="true"><span></span></div>
             {% if component.subtitle %}<p>{{ component.subtitle }}</p>{% endif %}
         </div>
     {% endif %}
 
-    <div class="elva-collections__grid" style="--elva-cols: {{ cols }}">
+    <div class="elva-collections__grid" style="--elva-cols: {{ cols }}" data-elva-stagger="0.12">
         {% for item in component.items %}
             <a href="{{ item.url ? item.url : '#' }}" class="elva-card{{ item.image ? '' : ' elva-card--empty' }}" aria-label="{{ item.title ? item.title : 'collection-' ~ loop.index }}">
                 {% if item.image %}

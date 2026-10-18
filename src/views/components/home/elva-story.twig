@@ -16,7 +16,7 @@ ELVA brand story — image with an offset hairline frame next to the brand text.
 <section component-id="{{ componentId }}" data-testid="store-home-elva-story"
          class="s-block elva-story{{ component.dark ? ' s-block--full-bg elva-story--dark' : '' }}">
     <div class="container elva-story__inner{{ component.reverse ? ' elva-story--reverse' : '' }}">
-        <div class="elva-story__media">
+        <div class="elva-story__media" data-elva-reveal="side">
             {% if component.image %}
                 <img class="elva-story__img" src="{{ component.image }}" alt="{{ component.title }}" loading="lazy" width="1000" height="1250">
             {% else %}
@@ -24,7 +24,7 @@ ELVA brand story — image with an offset hairline frame next to the brand text.
             {% endif %}
         </div>
 
-        <div class="elva-story__text">
+        <div class="elva-story__text" data-elva-stagger="0.1">
             {% if component.eyebrow %}
                 <p class="elva-eyebrow">{{ component.eyebrow }}</p>
             {% endif %}

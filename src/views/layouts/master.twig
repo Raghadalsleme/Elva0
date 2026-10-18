@@ -88,6 +88,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=El+Messiri:wght@500;600;700&display=swap">
 
+    {% if is_page('index') %}
+    {# ELVA motion: hide reveal targets only when JS runs; give up after 5s so content never stays hidden #}
+    <script data-cfasync="false">
+        (function () {
+            try {
+                if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                var d = document.documentElement;
+                d.classList.add('elva-motion');
+                setTimeout(function () { if (!window.__elvaMotion) d.classList.remove('elva-motion'); }, 5000);
+            } catch (e) {}
+        })();
+    </script>
+    {% endif %}
+
     {% set elva_palette = theme.settings.get('elva_palette', 'elva') %}
     <style>
         :root {

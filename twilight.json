@@ -1,9 +1,9 @@
-   {
-       "name": {
-           "ar": "إلفا للأزياء",
-           "en": "ELVA Fashion House"
-       },
-       "repository": "https://github.com/Raghadalsleme/Elva0",
+{
+    "name": {
+        "ar": "إلفا للأزياء",
+        "en": "ELVA Fashion House"
+    },
+    "repository": "https://github.com/Raghadalsleme/Elva0",
     "author_email": "Nu8th.dontstarve@gmail.com",
     "features": [
         "mega-menu",
@@ -339,13 +339,13 @@
                     "type": "static",
                     "format": "description",
                     "id": "elva-hero-note",
-                    "value": "<small>واجهة بإطار مزدوج مستوحى من شعار ELVA. تعمل بدون صورة أيضاً (خلفية برقوقية).</small>"
+                    "value": "<small>واجهة سينمائية بإطار الشعار: ارفع حتى 3 صور تتبدل تلقائياً مع حركة تكبير بطيئة، أو ضع رابط فيديو MP4. تعمل بدون صور أيضاً (خلفية برقوقية متحركة).</small>"
                 },
                 {
                     "type": "string",
                     "icon": "sicon-image",
                     "value": null,
-                    "label": "صورة الخلفية (للكمبيوتر)",
+                    "label": "الصورة 1 (للكمبيوتر)",
                     "id": "image",
                     "format": "image",
                     "required": false,
@@ -360,7 +360,7 @@
                     "type": "string",
                     "icon": "sicon-image",
                     "value": null,
-                    "label": "صورة الجوال (اختيارية)",
+                    "label": "نسخة الجوال من الصورة 1 (اختيارية)",
                     "id": "mobile_image",
                     "format": "image",
                     "required": false,
@@ -370,6 +370,50 @@
                         "height": 1100,
                         "width": 800
                     }
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-image",
+                    "value": null,
+                    "label": "الصورة 2 (اختيارية)",
+                    "id": "image_2",
+                    "format": "image",
+                    "required": false,
+                    "placeholder": null,
+                    "description": "* المقاس المناسب للصورة هو 1920×900 بكسل",
+                    "settings": {
+                        "height": 900,
+                        "width": 1920
+                    }
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-image",
+                    "value": null,
+                    "label": "الصورة 3 (اختيارية)",
+                    "id": "image_3",
+                    "format": "image",
+                    "required": false,
+                    "placeholder": null,
+                    "description": "* المقاس المناسب للصورة هو 1920×900 بكسل",
+                    "settings": {
+                        "height": 900,
+                        "width": 1920
+                    }
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-format-text-alt",
+                    "label": "رابط فيديو MP4 (اختياري)",
+                    "multilanguage": false,
+                    "id": "video",
+                    "value": null,
+                    "required": false,
+                    "format": "text",
+                    "description": "إذا وضعت رابط فيديو يعمل بدل الصور، صامت ومتكرر. الأفضل فيديو قصير (10-20 ثانية) وحجم صغير.",
+                    "placeholder": "https://...mp4",
+                    "minLength": 0,
+                    "maxLength": 500
                 },
                 {
                     "type": "string",
@@ -504,8 +548,8 @@
                     "id": "full_height",
                     "format": "switch",
                     "required": false,
-                    "value": false,
-                    "selected": false
+                    "value": true,
+                    "selected": true
                 },
                 {
                     "type": "boolean",
@@ -517,6 +561,138 @@
                     "required": false,
                     "value": true,
                     "selected": true
+                }
+            ]
+        },
+        {
+            "key": "c24ea33e-d6eb-43e3-aa5c-dadae25da405",
+            "title": {
+                "en": "ELVA Statement",
+                "ar": "بيان ELVA"
+            },
+            "icon": "sicon-typography",
+            "path": "home.elva-statement",
+            "is_default": true,
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "elva-statement-note",
+                    "value": "<small>نص كبير تضيء كلماته واحدة واحدة مع التمرير، ثم أرقام تعدّ تلقائياً. ضع *نجمتين* حول كلمة لتلوينها.</small>"
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-format-text-alt",
+                    "label": "سطر صغير أعلى النص",
+                    "multilanguage": true,
+                    "id": "eyebrow",
+                    "value": "ELVA FASHION HOUSE",
+                    "required": false,
+                    "format": "text",
+                    "description": null,
+                    "placeholder": "أدخل النص هنا...",
+                    "minLength": 0,
+                    "maxLength": 60
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-typography",
+                    "label": "النص",
+                    "multilanguage": true,
+                    "id": "text",
+                    "value": "لا نصمّم أزياءً فحسب، بل نصنع *حضوراً* يبقى في الذاكرة.",
+                    "required": false,
+                    "format": "textarea",
+                    "description": "ضع الكلمة بين نجمتين *هكذا* لتظهر بلون مميز",
+                    "placeholder": "أدخل النص هنا...",
+                    "minLength": 0,
+                    "maxLength": 300
+                },
+                {
+                    "type": "boolean",
+                    "icon": "sicon-toggle-off",
+                    "label": "خلفية برقوقية داكنة",
+                    "description": null,
+                    "id": "dark",
+                    "format": "switch",
+                    "required": false,
+                    "value": false,
+                    "selected": false
+                },
+                {
+                    "type": "boolean",
+                    "icon": "sicon-toggle-off",
+                    "label": "إظهار الأرقام",
+                    "description": null,
+                    "id": "show_counters",
+                    "format": "switch",
+                    "required": false,
+                    "value": true,
+                    "selected": true
+                },
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "elva-counters-note",
+                    "value": "<div style='background-color:#f5f5f5;border-radius:8px;padding:12px 16px;color:#333;font-size:14px;line-height:1.6;'><strong style='color:#4B1D3F;'>مهم:</strong> الأرقام الافتراضية مثال فقط، استبدلها بأرقام متجرك الحقيقية أو أخفِ الأرقام.</div>"
+                },
+                {
+                    "id": "counters",
+                    "type": "collection",
+                    "format": "collection",
+                    "required": true,
+                    "minLength": 1,
+                    "maxLength": 4,
+                    "label": "الأرقام",
+                    "item_label": "رقم",
+                    "value": [
+                        {
+                            "counters.number": "+5000",
+                            "counters.label": "عميلة سعيدة"
+                        },
+                        {
+                            "counters.number": "%100",
+                            "counters.label": "خامات مختارة"
+                        },
+                        {
+                            "counters.number": "+120",
+                            "counters.label": "تصميم حصري"
+                        },
+                        {
+                            "counters.number": "4.9",
+                            "counters.label": "تقييم العملاء"
+                        }
+                    ],
+                    "fields": [
+                        {
+                            "type": "string",
+                            "icon": "sicon-format-text-alt",
+                            "label": "الرقم",
+                            "multilanguage": false,
+                            "id": "counters.number",
+                            "value": null,
+                            "required": false,
+                            "format": "text",
+                            "description": "مثل: +5000 أو %100 أو 4.9",
+                            "placeholder": "+5000",
+                            "minLength": 0,
+                            "maxLength": 20
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-format-text-alt",
+                            "label": "الوصف",
+                            "multilanguage": true,
+                            "id": "counters.label",
+                            "value": null,
+                            "required": false,
+                            "format": "text",
+                            "description": null,
+                            "placeholder": "أدخل النص هنا...",
+                            "minLength": 0,
+                            "maxLength": 60
+                        }
+                    ]
                 }
             ]
         },
