@@ -1,9 +1,9 @@
-{
-    "name": {
-        "ar": "إلفا",
-        "en": "ELVA"
-    },
-    "repository": "https://github.com/YOUR-GITHUB-USERNAME/elva-theme",
+   {
+       "name": {
+           "ar": "إلفا للأزياء",
+           "en": "ELVA Fashion House"
+       },
+       "repository": "https://github.com/Raghadalsleme/Elva0",
     "author_email": "Nu8th.dontstarve@gmail.com",
     "features": [
         "mega-menu",
