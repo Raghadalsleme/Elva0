@@ -1,0 +1,612 @@
+/* =====================================================================
+   ELVA Fashion House — brand layer
+   Palette (sampled from the logo):
+     plum  #4B1D3F   cream #E7DAC0   rose #D8A7B1
+   Display type: Cormorant Garamond (Latin) + El Messiri (Arabic)
+   Motifs: double hairline frame, "line • • line" rule, "line ◆ line" ornament
+   ===================================================================== */
+
+/* ---------- Base ---------- */
+.theme-elva {
+  background-color: var(--elva-cream-l);
+  color: var(--elva-ink);
+
+  ::selection {
+    background: var(--elva-rose);
+    color: var(--elva-plum-d);
+  }
+}
+
+/* ---------- Typography ---------- */
+.theme-elva {
+  .s-block__title h2,
+  .s-slider-block__title h2,
+  .elva-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .s-block__title h2,
+  .s-slider-block__title h2 {
+    @apply text-2xl md:text-3xl text-elva-plum;
+    line-height: 1.25;
+
+    /* "line ◆ line" ornament under every section title */
+    &::after {
+      content: '';
+      display: block;
+      width: 92px;
+      height: 12px;
+      margin-top: 10px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='12' viewBox='0 0 92 12'%3E%3Cpath d='M0 6h36M56 6h36' stroke='%23D8A7B1' stroke-width='1'/%3E%3Cpath d='M46 1.5L51 6l-5 4.5L41 6z' fill='%23D8A7B1'/%3E%3C/svg%3E") no-repeat center / contain;
+    }
+  }
+
+  .s-block__display-all {
+    @apply text-elva-plum;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* ---------- Shared motifs ---------- */
+.elva-eyebrow {
+  @apply text-xs sm:text-sm uppercase;
+  letter-spacing: 0.35em;
+  color: var(--elva-rose);
+  [dir='rtl'] & {
+    letter-spacing: 0.08em;
+  }
+}
+
+/* line ◆ line */
+.elva-ornament {
+  @apply flex items-center justify-center gap-3;
+  color: var(--elva-rose);
+
+  &::before,
+  &::after {
+    content: '';
+    width: 56px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  span {
+    width: 9px;
+    height: 9px;
+    background: currentColor;
+    transform: rotate(45deg) scaleX(1.25);
+  }
+
+  &--start {
+    @apply justify-start;
+  }
+}
+
+/* line •     • line  (top rule of the logo) */
+.elva-dots {
+  @apply flex items-center justify-center;
+  color: var(--elva-rose);
+  gap: 10px;
+
+  i {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: currentColor;
+  }
+
+  b {
+    width: clamp(48px, 10vw, 120px);
+    height: 1px;
+    background: currentColor;
+  }
+
+  em {
+    width: clamp(36px, 8vw, 90px);
+  }
+}
+
+/* Buttons */
+.elva-btn {
+  @apply inline-flex items-center justify-center px-8 py-3 text-sm font-bold transition duration-300;
+  letter-spacing: 0.12em;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+
+  &--cream {
+    color: var(--elva-cream);
+    &:hover {
+      background: var(--elva-cream);
+      color: var(--elva-plum);
+      border-color: var(--elva-cream);
+    }
+  }
+
+  &--plum {
+    background: var(--elva-plum);
+    color: var(--elva-cream);
+    border-color: var(--elva-plum);
+    &:hover {
+      background: var(--elva-plum-d);
+      border-color: var(--elva-plum-d);
+    }
+  }
+}
+
+.theme-elva .btn {
+  border-radius: 2px;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- Header ---------- */
+.theme-elva {
+  .top-navbar {
+    background: var(--elva-rose-l);
+    color: var(--elva-plum);
+
+    .s-search-input {
+      background: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  &.topnav-is-dark .top-navbar {
+    background: var(--elva-plum);
+    color: var(--elva-cream);
+
+    .btn--circle-gray,
+    .btn--rounded-gray,
+    .s-search-input {
+      background: rgba(231, 218, 192, 0.1);
+      &:hover {
+        background: rgba(231, 218, 192, 0.16);
+      }
+    }
+
+    .s-search-input {
+      color: var(--elva-cream);
+    }
+
+    .topnav-link-item {
+      border-color: rgba(216, 167, 177, 0.25);
+    }
+  }
+
+  #mainnav,
+  #mainnav .inner {
+    background-color: #fff;
+  }
+
+  #mainnav {
+    box-shadow: none;
+    border-bottom: 1px solid rgba(216, 167, 177, 0.45);
+  }
+
+  .main-menu > li > a,
+  .main-menu > li > .main-menu__link {
+    letter-spacing: 0.04em;
+  }
+}
+
+/* ---------- Product cards ---------- */
+.theme-elva {
+  .s-product-card-entry {
+    border: 1px solid rgba(75, 29, 63, 0.08);
+    border-radius: 2px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      border-color: var(--elva-rose);
+      box-shadow: 0 14px 34px -18px rgba(75, 29, 63, 0.35);
+    }
+  }
+
+  .s-product-card-image,
+  .s-product-card-vertical .s-product-card-image {
+    border-radius: 0;
+    background-color: var(--elva-rose-l);
+  }
+
+  .s-product-card-content-title a {
+    color: var(--elva-ink);
+  }
+
+  .s-product-card-price,
+  .s-product-card-sale-price h4 {
+    color: var(--elva-plum);
+  }
+
+  .s-product-card-promotion-title,
+  .s-product-card-quantity {
+    background: var(--elva-rose);
+    color: var(--elva-plum-d);
+    border-radius: 0;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* ---------- Footer ---------- */
+.theme-elva {
+  &.footer-is-dark .store-footer {
+    background: var(--elva-plum-d);
+    color: var(--elva-cream);
+
+    .store-footer__inner {
+      background: var(--elva-plum);
+      border-bottom-color: rgba(216, 167, 177, 0.25);
+      border-bottom-style: solid;
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--elva-cream);
+      letter-spacing: 0.04em;
+    }
+
+    .social-link {
+      border-color: rgba(216, 167, 177, 0.5);
+    }
+
+    .contact-social {
+      border-color: rgba(216, 167, 177, 0.2);
+    }
+
+    .copyright-text p {
+      color: rgba(231, 218, 192, 0.75);
+    }
+  }
+
+  &.footer-is-light .store-footer {
+    background: var(--elva-cream);
+    color: var(--elva-ink);
+
+    .store-footer__inner {
+      background: var(--elva-cream-l);
+      border-bottom-color: rgba(75, 29, 63, 0.12);
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--elva-plum);
+    }
+  }
+}
+
+/* =====================================================================
+   ELVA home components
+   ===================================================================== */
+
+/* ---------- Section heading (shared) ---------- */
+.elva-head {
+  @apply text-center mb-8 md:mb-12 flex flex-col items-center gap-3;
+
+  h2 {
+    @apply text-3xl md:text-4xl text-elva-plum;
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  p {
+    @apply text-sm md:text-base max-w-xl;
+    color: rgba(43, 22, 38, 0.7);
+  }
+}
+
+/* ---------- Hero ---------- */
+.elva-hero {
+  @apply relative overflow-hidden flex items-center;
+  min-height: 460px;
+  background-color: var(--elva-plum);
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(216, 167, 177, 0.14), transparent 45%),
+    radial-gradient(circle at 85% 90%, rgba(231, 218, 192, 0.1), transparent 40%);
+  color: var(--elva-cream);
+
+  @screen md {
+    min-height: 600px;
+  }
+
+  &--full {
+    min-height: calc(100vh - 120px);
+    @screen md {
+      min-height: calc(100vh - 132px);
+    }
+  }
+
+  &__media {
+    @apply absolute inset-0;
+
+    img {
+      @apply w-full h-full object-cover;
+    }
+  }
+
+  &__shade {
+    @apply absolute inset-0;
+    background: linear-gradient(180deg, rgba(51, 18, 43, 0.35) 0%, rgba(51, 18, 43, 0.6) 100%);
+  }
+
+  /* double hairline frame, straight from the logo */
+  &__frame {
+    @apply absolute pointer-events-none;
+    inset: 12px;
+    border: 1px solid rgba(216, 167, 177, 0.75);
+    border-radius: 3px;
+
+    @screen md {
+      inset: 22px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(216, 167, 177, 0.5);
+      border-radius: 2px;
+
+      @screen md {
+        inset: 12px;
+      }
+    }
+  }
+
+  &__content {
+    @apply relative z-1 flex flex-col items-center text-center gap-5 py-20 px-8;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--elva-cream);
+    font-size: clamp(2.5rem, 7vw, 5.25rem);
+    line-height: 1.05;
+    letter-spacing: 0.06em;
+    [dir='rtl'] & {
+      letter-spacing: 0;
+      line-height: 1.3;
+    }
+  }
+
+  &__subtitle {
+    @apply text-base md:text-lg max-w-xl;
+    color: rgba(231, 218, 192, 0.88);
+  }
+
+  .elva-btn {
+    @apply mt-2;
+  }
+}
+
+/* ---------- Collections ---------- */
+.elva-collections {
+  &__grid {
+    @apply grid gap-3 sm:gap-6;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @screen md {
+      grid-template-columns: repeat(var(--elva-cols, 3), minmax(0, 1fr));
+    }
+  }
+}
+
+.elva-card {
+  @apply relative block overflow-hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--elva-rose-l);
+  border-radius: 2px;
+
+  &__media {
+    @apply absolute inset-0;
+
+    img {
+      @apply w-full h-full object-cover;
+      transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+  }
+
+  &__placeholder {
+    @apply absolute inset-0 flex items-center justify-center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 12vw, 8rem);
+    color: rgba(75, 29, 63, 0.12);
+  }
+
+  &__shade {
+    @apply absolute inset-0;
+    background: linear-gradient(180deg, transparent 45%, rgba(51, 18, 43, 0.75) 100%);
+  }
+
+  &__frame {
+    @apply absolute pointer-events-none;
+    inset: 10px;
+    border: 1px solid rgba(231, 218, 192, 0);
+    transition: border-color 0.5s, inset 0.5s;
+  }
+
+  &__label {
+    @apply absolute inset-x-0 bottom-0 z-1 p-4 sm:p-6 flex flex-col items-center text-center gap-1;
+    color: var(--elva-cream);
+
+    h3 {
+      @apply text-xl sm:text-2xl;
+      font-family: var(--font-display);
+      font-weight: 600;
+    }
+
+    span {
+      @apply text-xs;
+      letter-spacing: 0.25em;
+      color: var(--elva-rose);
+      [dir='rtl'] & {
+        letter-spacing: 0.05em;
+      }
+    }
+  }
+
+  &--empty &__label {
+    color: var(--elva-plum);
+
+    span {
+      color: var(--elva-plum-l, #6E3F61);
+    }
+  }
+
+  /* phones: an odd last card spans the full row as a wide banner */
+  @media (max-width: 767px) {
+    &:last-child:nth-child(odd) {
+      grid-column: span 2;
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  &:hover {
+    .elva-card__media img {
+      transform: scale(1.06);
+    }
+
+    .elva-card__frame {
+      inset: 14px;
+      border-color: rgba(231, 218, 192, 0.85);
+    }
+  }
+
+  &--empty:hover .elva-card__frame {
+    border-color: var(--elva-rose);
+  }
+}
+
+/* ---------- Brand story ---------- */
+.elva-story {
+  &--dark {
+    @apply py-16 md:py-24;
+    background: var(--elva-plum);
+    color: var(--elva-cream);
+  }
+
+  &__inner {
+    @apply grid items-center gap-10 md:gap-16;
+
+    @screen md {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &--reverse &__media {
+    @screen md {
+      order: 2;
+    }
+  }
+
+  &__media {
+    @apply relative;
+    padding: 0 14px 14px 0;
+
+    [dir='rtl'] & {
+      padding: 0 0 14px 14px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 14px 0 0 14px;
+      border: 1px solid var(--elva-rose);
+
+      [dir='rtl'] & {
+        inset: 14px 14px 0 0;
+      }
+    }
+  }
+
+  &__img {
+    @apply relative w-full object-cover;
+    aspect-ratio: 4 / 5;
+    background: var(--elva-rose-l);
+  }
+
+  &__placeholder {
+    @apply relative w-full flex items-center justify-center;
+    aspect-ratio: 4 / 5;
+    background: var(--elva-rose-l);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem;
+    color: rgba(75, 29, 63, 0.14);
+  }
+
+  &--dark &__placeholder {
+    background: rgba(231, 218, 192, 0.08);
+    color: rgba(231, 218, 192, 0.25);
+  }
+
+  &__text {
+    @apply flex flex-col items-start gap-5;
+
+    h2 {
+      @apply text-3xl md:text-5xl;
+      font-family: var(--font-display);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--elva-plum);
+    }
+
+    p {
+      @apply text-base leading-8;
+      color: rgba(43, 22, 38, 0.78);
+    }
+  }
+
+  &--dark &__text {
+    h2 {
+      color: var(--elva-cream);
+    }
+    p {
+      color: rgba(231, 218, 192, 0.82);
+    }
+  }
+}
+
+/* ---------- Promises band ---------- */
+.elva-promises {
+  @apply py-10 md:py-14;
+  background: var(--elva-plum);
+  color: var(--elva-cream);
+
+  &__list {
+    @apply grid gap-8;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @screen md {
+      grid-template-columns: repeat(var(--elva-cols, 4), minmax(0, 1fr));
+      @apply gap-0;
+    }
+  }
+
+  &__item {
+    @apply flex flex-col items-center text-center gap-2 px-4;
+
+    @screen md {
+      & + & {
+        border-inline-start: 1px solid rgba(216, 167, 177, 0.3);
+      }
+    }
+
+    i {
+      @apply text-3xl mb-1;
+      color: var(--elva-rose);
+    }
+
+    h3 {
+      @apply text-lg;
+      font-family: var(--font-display);
+      font-weight: 600;
+    }
+
+    p {
+      @apply text-sm;
+      color: rgba(231, 218, 192, 0.75);
+    }
+  }
+}
