@@ -400,6 +400,57 @@
   }
 }
 
+/* centred header: cream bar instead of stark white, and one icon style for search, menu, account and cart */
+.theme-elva #mainnav.elva-nav--centered,
+.theme-elva #mainnav.elva-nav--centered .inner {
+  background-color: var(--elva-cream-l);
+}
+
+.elva-nav--centered {
+  salla-cart-summary {
+    min-width: 0;
+  }
+
+  .header-btn__icon,
+  .s-user-menu-login-btn,
+  .s-user-menu-trigger-avatar {
+    width: 42px;
+    height: 42px;
+    margin: 0 !important;
+    border: 0 !important;
+    background: transparent;
+    color: var(--elva-plum) !important;
+    transition: background-color 0.3s;
+  }
+
+  .header-btn__icon:hover,
+  .s-user-menu-login-btn:hover {
+    background: var(--elva-rose-l);
+  }
+
+  .s-cart-summary-wrapper {
+    gap: 4px;
+  }
+
+  .s-cart-summary-count {
+    top: 2px;
+    background: var(--elva-rose-d, #8e4a5d);
+    color: #fff;
+  }
+
+  .s-cart-summary-total {
+    color: var(--elva-plum);
+    font-weight: 600;
+  }
+
+  /* phones: the bag icon with its count is enough, the total crowds the edge */
+  @media (max-width: 639px) {
+    .s-cart-summary-content {
+      display: none;
+    }
+  }
+}
+
 /* ---------- ELVA footer ---------- */
 .elva-footer {
   .store-footer__inner {
