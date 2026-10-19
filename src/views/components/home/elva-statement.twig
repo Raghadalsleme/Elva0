@@ -24,7 +24,8 @@ ELVA statement — words light up one by one as the section scrolls into view, t
         {% endif %}
 
         {% if component.text %}
-            <p class="elva-statement__text" data-elva-statement data-text="{{ component.text|e('html_attr') }}">{{ component.text|replace({'*': ''}) }}</p>
+            <p class="sr-only">{{ component.text|replace({'*': ''}) }}</p>
+            <p class="elva-statement__text" aria-hidden="true" data-elva-statement data-text="{{ component.text|e('html_attr') }}">{{ component.text|replace({'*': ''}) }}</p>
         {% endif %}
 
         {% if component.show_counters and counters|length %}

@@ -53,7 +53,16 @@
 .elva-eyebrow {
   @apply text-xs sm:text-sm uppercase;
   letter-spacing: 0.35em;
-  color: var(--elva-rose);
+  /* darker rose on light backgrounds keeps AA contrast; the light rose is used on plum */
+  color: var(--elva-rose-d, #8e4a5d);
+
+  .elva-hero &,
+  .elva-story--dark &,
+  .elva-statement--dark &,
+  .elva-promises &,
+  .elva-cat-hero--image & {
+    color: var(--elva-rose);
+  }
   [dir='rtl'] & {
     letter-spacing: 0.08em;
   }
@@ -189,10 +198,9 @@
   }
 }
 
-/* ---------- Product cards ---------- */
+/* ---------- Product cards (base layouts only; the ELVA card lives in elva-product.scss) ---------- */
 .theme-elva {
-  .s-product-card-entry {
-    border: 1px solid rgba(75, 29, 63, 0.08);
+  .s-product-card-entry:not(.elva-pcard-host) {
     border-radius: 2px;
     transition: border-color 0.3s, box-shadow 0.3s;
 
@@ -273,6 +281,190 @@
       color: var(--elva-plum);
     }
   }
+}
+
+/* ---------- ELVA centred header ---------- */
+.elva-header--centered .top-navbar .header-search {
+  display: none;
+}
+
+.elva-nav--centered {
+  .elva-nav__bar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    min-height: 68px;
+
+    @screen lg {
+      min-height: 96px;
+    }
+  }
+
+  .elva-nav__start {
+    @apply flex items-center gap-1;
+    justify-self: start;
+  }
+
+  .elva-nav__end {
+    @apply flex items-center justify-end;
+    justify-self: end;
+  }
+
+  .elva-nav__brand {
+    justify-self: center;
+    margin: 0;
+    padding: 8px 0;
+
+    img {
+      max-height: 44px;
+      max-width: 140px;
+
+      @screen lg {
+        max-height: 64px;
+        max-width: 200px;
+      }
+    }
+  }
+
+  .elva-nav__icon {
+    @apply inline-flex items-center justify-center rounded-full;
+    width: 42px;
+    height: 42px;
+    color: var(--elva-plum);
+    transition: background-color 0.3s;
+
+    &:hover,
+    &:focus-visible {
+      background: var(--elva-rose-l);
+    }
+
+    &.mburger {
+      @screen lg {
+        display: none;
+      }
+    }
+  }
+
+  .elva-nav__menu {
+    position: relative;
+
+    custom-main-menu {
+      display: block;
+      min-height: 0;
+    }
+
+    @screen lg {
+      border-top: 1px solid rgba(216, 167, 177, 0.35);
+
+      custom-main-menu {
+        min-height: 54px;
+      }
+
+      .main-menu {
+        justify-content: center;
+        margin: 0;
+        padding-top: 0;
+
+        li.root-level > a {
+          padding-top: 17px;
+          padding-bottom: 17px;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+        }
+      }
+
+      .main-menu-skel {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 17px 0;
+      }
+    }
+  }
+
+  &.fixed-pinned {
+    .elva-nav__bar {
+      @screen lg {
+        min-height: 70px;
+      }
+    }
+
+    .elva-nav__brand img {
+      max-height: 40px;
+    }
+
+    .main-menu li.root-level > a {
+      padding-top: 13px;
+      padding-bottom: 13px;
+    }
+  }
+}
+
+/* ---------- ELVA footer ---------- */
+.elva-footer {
+  .store-footer__inner {
+    @apply py-12 lg:py-16;
+  }
+
+  &__brand {
+    @apply flex flex-col items-center text-center mx-auto mb-10 lg:mb-14 pb-10 lg:pb-14;
+    max-width: 640px;
+    border-bottom: 1px solid rgba(216, 167, 177, 0.25);
+
+    h3 {
+      @apply text-3xl lg:text-4xl mb-0;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  &__ornament {
+    @apply flex items-center gap-2 mb-5;
+
+    i {
+      display: block;
+      width: 46px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.45;
+    }
+
+    b {
+      display: block;
+      width: 7px;
+      height: 7px;
+      transform: rotate(45deg);
+      background: var(--elva-rose);
+    }
+  }
+
+  &__desc {
+    @apply mt-4 leading-7 text-sm;
+    opacity: 0.85;
+  }
+
+  &__social {
+    @apply block mt-6;
+
+    ul {
+      justify-content: center;
+    }
+  }
+
+  &__cols {
+    @apply grid grid-cols-1 gap-10 md:grid-cols-3 lg:gap-12;
+  }
+
+  &__muted {
+    opacity: 0.75;
+  }
+
+  &__bottom {
+    @apply flex flex-col md:flex-row items-center justify-between gap-4 py-5 text-center;
+  }
+}
+
+.theme-elva.footer-is-light .elva-footer__brand {
+  border-bottom-color: rgba(75, 29, 63, 0.12);
 }
 
 /* =====================================================================

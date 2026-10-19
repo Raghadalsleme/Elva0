@@ -1,0 +1,1216 @@
+/* =====================================================================
+   ELVA product experience: product card, quick view, product page,
+   category page. Brand tokens come from elva.scss (:root --elva-*).
+   ===================================================================== */
+
+$elva-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+.elva-icon {
+  display: inline-block;
+  flex: none;
+}
+
+/* =====================================================================
+   PRODUCT CARD
+   ===================================================================== */
+.theme-elva .elva-pcard-host {
+  display: block;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+
+  &:hover {
+    box-shadow: none;
+  }
+}
+
+.elva-pcard {
+  @apply relative flex flex-col h-full;
+  color: var(--elva-ink);
+
+  &__media {
+    @apply relative overflow-hidden;
+    background: var(--elva-rose-l);
+  }
+
+  &__frame {
+    @apply relative block w-full overflow-hidden;
+    aspect-ratio: var(--elva-ratio, 3/4);
+
+    &:focus-visible {
+      outline: 2px solid var(--elva-plum);
+      outline-offset: -2px;
+    }
+  }
+
+  &__img {
+    @apply absolute inset-0 w-full h-full;
+    transition:
+      opacity 0.6s ease,
+      transform 1.4s $elva-ease;
+
+    &.elva-fit-cover {
+      object-fit: cover;
+    }
+
+    &.elva-fit-contain {
+      object-fit: contain;
+      padding: 8%;
+    }
+
+    &--alt {
+      opacity: 0;
+    }
+  }
+
+  &__shade {
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(180deg, transparent 40%, rgba(43, 22, 38, 0.82) 100%);
+  }
+
+  /* badges */
+  &__badges {
+    @apply absolute z-2 flex flex-col items-start gap-1.5 pointer-events-none;
+    top: 10px;
+    inset-inline-start: 10px;
+  }
+
+  &__badge {
+    @apply text-xs font-bold leading-none;
+    padding: 6px 9px;
+    letter-spacing: 0.03em;
+    background: var(--elva-cream-l);
+    color: var(--elva-plum);
+
+    &--sale {
+      background: var(--elva-plum);
+      color: var(--elva-cream);
+    }
+
+    &--out {
+      background: var(--elva-ink);
+      color: #fff;
+    }
+  }
+
+  /* wishlist + quick view */
+  &__tools {
+    @apply absolute z-2 flex flex-col gap-2;
+    top: 10px;
+    inset-inline-end: 10px;
+  }
+
+  &__tool,
+  &__tools salla-button.elva-pcard__tool .s-button-element {
+    @apply flex items-center justify-center;
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 9999px !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    color: var(--elva-plum) !important;
+    border: 0 !important;
+    box-shadow: 0 6px 18px -10px rgba(43, 22, 38, 0.5);
+    transition:
+      transform 0.3s $elva-ease,
+      opacity 0.3s ease,
+      background 0.3s;
+
+    &:hover {
+      background: #fff !important;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--elva-plum);
+      outline-offset: 2px;
+    }
+  }
+
+  &__tools salla-button.elva-pcard__tool {
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    box-shadow: none;
+  }
+
+  /* quick add */
+  &__add {
+    align-self: stretch;
+    width: 100%;
+
+    salla-add-product-button,
+    salla-button,
+    .s-button-element {
+      display: block;
+      width: 100%;
+    }
+
+    .s-button-element {
+      border-radius: 0 !important;
+      min-height: 44px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+  }
+
+  &__add--hover {
+    @apply absolute z-2 inset-x-0 bottom-0;
+    transform: translateY(101%);
+    transition: transform 0.45s $elva-ease;
+
+    .s-button-element {
+      background: var(--elva-plum) !important;
+      border-color: var(--elva-plum) !important;
+      color: var(--elva-cream) !important;
+    }
+  }
+
+  &__add--touch {
+    @apply mt-3;
+    margin-top: auto;
+    padding-top: 12px;
+
+    .s-button-element {
+      background: var(--elva-plum) !important;
+      border: 1px solid var(--elva-plum) !important;
+      color: var(--elva-cream) !important;
+      min-height: 42px;
+      font-size: 0.85rem;
+    }
+  }
+
+  /* body */
+  &__body {
+    @apply flex flex-col flex-1;
+    padding: 14px 2px 4px;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.45;
+
+    a {
+      @apply line-clamp-2;
+      color: var(--elva-ink);
+      transition: color 0.3s;
+
+      &:hover {
+        color: var(--elva-plum);
+      }
+    }
+  }
+
+  &__subtitle {
+    @apply text-xs mt-1 line-clamp-1;
+    color: rgba(43, 22, 38, 0.66);
+  }
+
+  &__meta {
+    @apply flex items-center gap-3 mt-2 flex-wrap;
+  }
+
+  &__price {
+    @apply flex items-baseline gap-2 flex-wrap;
+  }
+
+  &__price-now {
+    @apply font-bold;
+    color: var(--elva-plum);
+  }
+
+  &__price-was {
+    @apply text-sm line-through;
+    color: rgba(43, 22, 38, 0.66);
+  }
+
+  &__price-from {
+    @apply text-xs;
+    color: rgba(43, 22, 38, 0.66);
+  }
+
+  &__rating {
+    @apply inline-flex items-center gap-1 text-xs;
+    color: rgba(43, 22, 38, 0.72);
+
+    i {
+      color: #b8892f;
+    }
+  }
+
+  /* ---------- styles ---------- */
+  &--editorial &__body {
+    @apply items-center text-center;
+  }
+
+  &--editorial &__meta {
+    @apply justify-center;
+  }
+
+  &--classic {
+    background: #fff;
+    border: 1px solid rgba(75, 29, 63, 0.1);
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
+
+    &:hover {
+      border-color: var(--elva-rose);
+      box-shadow: 0 16px 34px -22px rgba(75, 29, 63, 0.45);
+    }
+  }
+
+  &--classic &__body {
+    padding: 14px 14px 14px;
+  }
+
+  &--classic &__add {
+    margin-top: auto;
+    padding-top: 12px;
+
+    .s-button-element {
+      background: transparent !important;
+      color: var(--elva-plum) !important;
+      border: 1px solid var(--elva-plum) !important;
+
+      &:hover {
+        background: var(--elva-plum) !important;
+        color: var(--elva-cream) !important;
+      }
+    }
+  }
+
+  &--overlay &__body {
+    @apply absolute z-1 inset-x-0 pointer-events-none;
+    bottom: 0;
+    padding: 18px 16px;
+    color: var(--elva-cream);
+    transition: transform 0.45s $elva-ease;
+
+    a,
+    salla-add-product-button {
+      pointer-events: auto;
+    }
+  }
+
+  &--overlay &__title a,
+  &--overlay &__price-now {
+    color: #fff;
+  }
+
+  &--overlay &__price-was,
+  &--overlay &__subtitle,
+  &--overlay &__rating {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  &--overlay &__add--touch .s-button-element {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: var(--elva-plum) !important;
+    border: 0 !important;
+  }
+
+  /* out of stock */
+  &--out &__img {
+    filter: grayscale(0.7);
+    opacity: 0.85;
+  }
+}
+
+/* hover-capable devices: alt image, quick add bar, tool reveal */
+@media (hover: hover) and (pointer: fine) {
+  .elva-pcard {
+    &__add--touch {
+      display: none;
+    }
+
+    &__qv {
+      opacity: 0;
+      transform: translateX(8px);
+
+      [dir='rtl'] & {
+        transform: translateX(-8px);
+      }
+    }
+
+    &:hover &__qv,
+    &:focus-within &__qv {
+      opacity: 1;
+      transform: none;
+    }
+
+    &:hover &__add--hover,
+    &:focus-within &__add--hover {
+      transform: none;
+    }
+
+    &--has-alt:hover &__img--alt {
+      opacity: 1;
+    }
+
+    &--has-alt:hover &__img--main {
+      opacity: 0;
+    }
+
+    &:not(.elva-pcard--has-alt):hover &__img--main {
+      transform: scale(1.05);
+    }
+
+    &--overlay:hover &__body {
+      transform: translateY(-46px);
+    }
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .elva-pcard__add--hover {
+    display: none;
+  }
+}
+
+/* keep the base card look for special layouts only */
+.theme-elva .s-product-card-entry:not(.elva-pcard-host) {
+  border: 1px solid rgba(75, 29, 63, 0.08);
+}
+
+/* =====================================================================
+   QUICK VIEW
+   ===================================================================== */
+html.elva-qv-open {
+  overflow: hidden;
+}
+
+.elva-qv {
+  @apply p-0 border-0;
+  width: min(980px, 94vw);
+  max-width: none;
+  max-height: 92vh;
+  background: var(--elva-cream-l);
+  color: var(--elva-ink);
+  overflow: visible;
+
+  &::backdrop {
+    background: rgba(43, 22, 38, 0.6);
+    backdrop-filter: blur(3px);
+  }
+
+  &[open] &__panel {
+    animation: elvaQvIn 0.4s $elva-ease both;
+  }
+
+  &__panel {
+    @apply relative grid;
+    max-height: 92vh;
+    overflow: auto;
+    grid-template-columns: 1fr;
+
+    @screen md {
+      grid-template-columns: 1.05fr 1fr;
+    }
+  }
+
+  &__close {
+    @apply absolute z-3 flex items-center justify-center rounded-full;
+    top: 12px;
+    inset-inline-end: 12px;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    color: var(--elva-plum);
+    box-shadow: 0 6px 18px -10px rgba(43, 22, 38, 0.5);
+
+    &:focus-visible {
+      outline: 2px solid var(--elva-plum);
+      outline-offset: 2px;
+    }
+  }
+
+  &__gallery {
+    @apply flex flex-col;
+    background: var(--elva-rose-l);
+  }
+
+  &__stage {
+    @apply relative overflow-hidden;
+    aspect-ratio: 3/4;
+    max-height: 70vh;
+  }
+
+  &__img {
+    @apply absolute inset-0 w-full h-full;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+
+    &.is-active {
+      opacity: 1;
+    }
+  }
+
+  &__nav {
+    @apply absolute z-2 flex items-center justify-center rounded-full;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--elva-plum);
+
+    &--prev {
+      inset-inline-start: 12px;
+    }
+
+    &--next {
+      inset-inline-end: 12px;
+    }
+
+    [dir='rtl'] & .elva-icon {
+      transform: scaleX(-1);
+    }
+  }
+
+  &__thumbs {
+    @apply flex gap-2 p-3 overflow-x-auto;
+  }
+
+  &__thumb {
+    @apply flex-none overflow-hidden;
+    width: 56px;
+    aspect-ratio: 3/4;
+    opacity: 0.55;
+    outline: 1px solid transparent;
+    transition:
+      opacity 0.3s,
+      outline-color 0.3s;
+
+    img {
+      @apply w-full h-full object-cover;
+    }
+
+    &.is-active {
+      opacity: 1;
+      outline-color: var(--elva-plum);
+    }
+  }
+
+  &__info {
+    @apply flex flex-col gap-4;
+    justify-content: center;
+    padding: 36px 28px 28px;
+
+    @screen md {
+      padding: 56px 40px 40px;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    line-height: 1.3;
+    color: var(--elva-plum);
+  }
+
+  &__subtitle {
+    color: rgba(43, 22, 38, 0.72);
+  }
+
+  &__price {
+    @apply flex items-baseline gap-3 flex-wrap;
+  }
+
+  &__price-now {
+    @apply text-2xl font-bold;
+    color: var(--elva-plum);
+  }
+
+  &__price-was {
+    @apply line-through;
+    color: rgba(43, 22, 38, 0.66);
+  }
+
+  &__price-badge {
+    @apply text-xs font-bold;
+    padding: 4px 8px;
+    background: var(--elva-plum);
+    color: var(--elva-cream);
+  }
+
+  &__rating {
+    @apply flex items-center gap-1 text-sm;
+
+    i {
+      color: #b8892f;
+    }
+  }
+
+  &__actions {
+    @apply flex flex-col gap-3 mt-2;
+
+    salla-add-product-button,
+    salla-add-product-button .s-button-element {
+      display: block;
+      width: 100%;
+    }
+
+    .s-button-element {
+      border-radius: 0 !important;
+      min-height: 50px;
+      background: var(--elva-plum) !important;
+      border-color: var(--elva-plum) !important;
+      color: var(--elva-cream) !important;
+      font-weight: 700;
+    }
+  }
+
+  &__details {
+    @apply text-sm text-center underline;
+    color: var(--elva-plum);
+    text-underline-offset: 4px;
+  }
+}
+
+@keyframes elvaQvIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =====================================================================
+   PRODUCT PAGE
+   ===================================================================== */
+.elva-pdp {
+  @apply relative;
+
+  &__grid {
+    /* stretch so the info column is as tall as the gallery and its content can stick */
+    @apply grid items-stretch gap-8;
+    grid-template-columns: minmax(0, 1fr);
+
+    @screen md {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 3rem;
+    }
+
+    @screen lg {
+      gap: 4.5rem;
+    }
+  }
+
+  /* ---------- gallery ---------- */
+  &__gallery {
+    @apply relative min-w-0 self-start;
+  }
+
+  &__badges {
+    @apply absolute z-3 flex flex-col items-start gap-1.5 pointer-events-none;
+    top: 14px;
+    inset-inline-start: 14px;
+  }
+
+  &__badge {
+    @apply text-xs font-bold leading-none;
+    padding: 7px 10px;
+    background: var(--elva-cream-l);
+    color: var(--elva-plum);
+    letter-spacing: 0.03em;
+
+    &--sale {
+      background: var(--elva-plum);
+      color: var(--elva-cream);
+    }
+  }
+
+  &__stack {
+    @apply hidden gap-3;
+
+    @screen md {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__shot {
+    @apply relative block overflow-hidden;
+    aspect-ratio: 3/4;
+    background: var(--elva-rose-l);
+    cursor: zoom-in;
+
+    img {
+      @apply w-full h-full object-cover;
+      transition: transform 1.4s $elva-ease;
+    }
+
+    &:hover img {
+      transform: scale(1.04);
+    }
+
+    &--lead {
+      grid-column: 1 / -1;
+      aspect-ratio: 4/5;
+    }
+
+    &--video::after {
+      content: '';
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: 64px;
+      height: 64px;
+      margin: -32px 0 0 -32px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.9)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l9 5-9 5z' fill='%234B1D3F'/%3E%3C/svg%3E") no-repeat center / 28px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--elva-plum);
+      outline-offset: 2px;
+    }
+  }
+
+  &__slider {
+    overflow: hidden;
+  }
+
+  &__slider--phone {
+    @screen md {
+      display: none;
+    }
+  }
+
+  .details-slider {
+    background: var(--elva-rose-l);
+    border-radius: 0 !important;
+
+    .swiper-slide img {
+      border-radius: 0 !important;
+    }
+
+    [slot='thumbs'] img,
+    .s-slider-thumbs img {
+      border-radius: 0 !important;
+      background: var(--elva-rose-l);
+    }
+  }
+
+  &__calories {
+    @apply absolute z-2 flex flex-col items-center justify-center rounded-full;
+    top: 14px;
+    inset-inline-end: 14px;
+    width: 76px;
+    height: 76px;
+    background: #fff;
+    color: var(--elva-plum);
+
+    span {
+      @apply text-lg font-bold leading-none;
+    }
+
+    small {
+      @apply text-xs;
+    }
+  }
+
+  /* ---------- information ---------- */
+  &__info {
+    @apply min-w-0;
+  }
+
+  &__sticky {
+    @apply flex flex-col gap-5;
+
+    @screen md {
+      position: sticky;
+      top: 110px;
+    }
+  }
+
+  &__eyebrow-row {
+    @apply flex items-center justify-between gap-4;
+  }
+
+  &__eyebrow {
+    @apply text-xs uppercase font-bold;
+    letter-spacing: 0.22em;
+    color: var(--elva-rose-d, #8e4a5d);
+
+    [dir='rtl'] & {
+      letter-spacing: 0.04em;
+    }
+
+    &:hover {
+      color: var(--elva-plum);
+    }
+  }
+
+  &__brand img {
+    max-height: 36px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    line-height: 1.25;
+    color: var(--elva-plum);
+    margin: 0;
+  }
+
+  &__subtitle {
+    @apply text-base;
+    color: rgba(43, 22, 38, 0.72);
+    margin-top: -0.5rem;
+  }
+
+  &__price {
+    @apply flex flex-col gap-1;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(75, 29, 63, 0.12);
+  }
+
+  &__price-now {
+    @apply text-2xl font-bold;
+    color: var(--elva-plum);
+  }
+
+  &__price-was {
+    @apply text-base line-through;
+    color: rgba(43, 22, 38, 0.66);
+  }
+
+  &__price-from {
+    @apply text-sm;
+    color: rgba(43, 22, 38, 0.7);
+  }
+
+  &__out {
+    @apply text-base font-bold;
+    color: #a3243b;
+  }
+
+  &__tax {
+    @apply text-xs;
+    color: rgba(43, 22, 38, 0.66);
+  }
+
+  &__stock {
+    @apply flex flex-wrap gap-x-6 gap-y-2 text-sm;
+    color: #7a2a3c;
+
+    i {
+      margin-inline-end: 4px;
+    }
+  }
+
+  &__line-btn {
+    @apply flex items-center gap-2 w-full text-sm;
+    padding: 14px 0;
+    border-top: 1px solid rgba(75, 29, 63, 0.12);
+    border-bottom: 1px solid rgba(75, 29, 63, 0.12);
+    color: var(--elva-ink);
+
+    &-cta {
+      margin-inline-start: auto;
+      color: var(--elva-plum);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+  }
+
+  /* form: options from Salla components get the ELVA look */
+  &__form {
+    @apply flex flex-col gap-4;
+
+    > section,
+    salla-product-options .s-product-options-option-container,
+    .s-product-options-option {
+      background: transparent !important;
+      padding-inline: 0 !important;
+      border-radius: 0 !important;
+    }
+
+    .s-product-options-option-label,
+    .form-label {
+      font-weight: 700;
+      color: var(--elva-ink);
+    }
+
+    .s-product-options-thumbnails-wrapper label,
+    .s-product-options-colors-wrapper label,
+    .s-product-options-multiple-options-wrapper label {
+      border-radius: 0 !important;
+    }
+  }
+
+  &__buy {
+    @apply flex items-stretch gap-3 flex-wrap;
+    background: transparent !important;
+    padding: 0 !important;
+
+    salla-add-product-button {
+      flex: 1 1 200px;
+    }
+
+    salla-add-product-button .s-button-element {
+      width: 100%;
+    }
+
+    .s-button-element {
+      border-radius: 0 !important;
+      min-height: 54px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    salla-add-product-button .s-button-element {
+      background: var(--elva-plum) !important;
+      border-color: var(--elva-plum) !important;
+      color: var(--elva-cream) !important;
+
+      &:hover {
+        background: var(--elva-plum-d) !important;
+      }
+    }
+  }
+
+  &__qty {
+    salla-quantity-input .s-quantity-input-container {
+      height: 54px;
+      border-radius: 0 !important;
+      border-color: rgba(75, 29, 63, 0.25) !important;
+      background: #fff;
+    }
+  }
+
+  &__wish .s-button-element {
+    width: 54px !important;
+    height: 54px !important;
+    border: 1px solid rgba(75, 29, 63, 0.25) !important;
+    background: #fff !important;
+    color: var(--elva-plum) !important;
+  }
+
+  &__accordions {
+    border-top: 1px solid rgba(75, 29, 63, 0.12);
+  }
+
+  &__meta {
+    @apply flex justify-between gap-4 text-sm py-2;
+    border-top: 1px dashed rgba(75, 29, 63, 0.15);
+  }
+
+  &__tags {
+    @apply flex flex-wrap gap-2 pt-3;
+
+    a {
+      @apply text-xs;
+      padding: 6px 10px;
+      border: 1px solid rgba(75, 29, 63, 0.2);
+      color: var(--elva-plum);
+
+      &:hover {
+        background: var(--elva-plum);
+        color: var(--elva-cream);
+      }
+    }
+  }
+
+  &__share {
+    @apply flex;
+  }
+
+  &__reviews {
+    @apply mt-12 md:mt-20;
+  }
+
+  &__related {
+    @apply mt-12 md:mt-20 mb-10;
+  }
+}
+
+/* sticky add-to-cart bar on phones keeps a solid surface */
+@media (max-width: 640px) {
+  .is-sticky-product-bar .elva-pdp__buy.sticky-product-bar {
+    background: var(--elva-cream-l) !important;
+    padding: 12px !important;
+    flex-wrap: nowrap;
+  }
+
+  .is-sticky-product-bar .elva-pdp__wish {
+    display: none;
+  }
+}
+
+/* ---------- accordion ---------- */
+.elva-acc {
+  border-bottom: 1px solid rgba(75, 29, 63, 0.12);
+
+  &__head {
+    @apply flex items-center justify-between cursor-pointer select-none;
+    padding: 18px 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--elva-plum);
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: '';
+      flex: none;
+      width: 12px;
+      height: 12px;
+      background:
+        linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 1.5px 12px no-repeat;
+      transition: transform 0.3s $elva-ease;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--elva-plum);
+      outline-offset: 2px;
+    }
+  }
+
+  &[open] &__head::after {
+    transform: rotate(45deg);
+  }
+
+  &__body {
+    @apply text-sm leading-7;
+    padding-bottom: 20px;
+    color: rgba(43, 22, 38, 0.85);
+  }
+}
+
+/* =====================================================================
+   CATEGORY PAGE
+   ===================================================================== */
+.elva-cat-hero {
+  @apply relative overflow-hidden mb-6 md:mb-10;
+  background: var(--elva-rose-l);
+
+  &__inner {
+    @apply relative z-1 flex flex-col items-center text-center gap-4;
+    padding-block: 2.75rem;
+
+    @screen md {
+      padding-block: 4rem;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 4.4vw, 3.4rem);
+    line-height: 1.2;
+    color: var(--elva-plum);
+  }
+
+  &--image {
+    background: var(--elva-plum);
+    min-height: 260px;
+
+    @screen md {
+      min-height: 380px;
+    }
+
+    .elva-cat-hero__inner {
+      @apply justify-center;
+      min-height: inherit;
+    }
+
+    .elva-cat-hero__title {
+      color: #fff;
+    }
+
+    .elva-ornament {
+      color: var(--elva-cream);
+    }
+  }
+
+  &__img {
+    @apply absolute inset-0 w-full h-full object-cover;
+  }
+
+  &__shade {
+    @apply absolute inset-0;
+    background: linear-gradient(180deg, rgba(43, 22, 38, 0.35), rgba(43, 22, 38, 0.65));
+  }
+}
+
+.elva-cat-chips {
+  @apply flex gap-3 overflow-x-auto pb-2 mb-6 md:mb-8;
+  scrollbar-width: thin;
+
+  &__item {
+    @apply flex-none inline-flex items-center gap-2 text-sm;
+    padding: 8px 16px;
+    border: 1px solid rgba(75, 29, 63, 0.22);
+    border-radius: 9999px;
+    color: var(--elva-plum);
+    background: #fff;
+    transition:
+      background 0.3s,
+      color 0.3s;
+
+    img {
+      width: 26px;
+      height: 26px;
+      border-radius: 9999px;
+      object-fit: cover;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: var(--elva-plum);
+      color: var(--elva-cream);
+    }
+  }
+}
+
+.elva-cat {
+  @apply flex items-start gap-8;
+
+  &__filters {
+    @apply flex-none;
+  }
+
+  &--sidebar &__filters {
+    @screen lg {
+      position: sticky;
+      top: 6rem;
+      width: 17rem;
+    }
+  }
+
+  &__main {
+    @apply flex-1 min-w-0 w-full;
+  }
+
+  &__toolbar {
+    @apply flex items-center justify-between gap-4 flex-wrap mb-5 md:mb-7 pb-4;
+    border-bottom: 1px solid rgba(75, 29, 63, 0.12);
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--elva-plum);
+  }
+
+  &__tools {
+    @apply flex items-center gap-3;
+    margin-inline-start: auto;
+  }
+
+  &__filter-btn {
+    @apply inline-flex items-center gap-2 text-sm font-bold;
+    padding: 9px 16px;
+    border: 1px solid var(--elva-plum);
+    color: var(--elva-plum);
+    transition:
+      background 0.3s,
+      color 0.3s;
+
+    &:hover {
+      background: var(--elva-plum);
+      color: var(--elva-cream);
+    }
+  }
+
+  &--sidebar &__filter-btn {
+    @screen lg {
+      display: none;
+    }
+  }
+
+  &__cols {
+    @apply hidden items-center gap-1;
+
+    @screen lg {
+      display: flex;
+    }
+  }
+
+  &__col-btn {
+    @apply flex items-center justify-center;
+    width: 38px;
+    height: 38px;
+    color: rgba(75, 29, 63, 0.6);
+    transition: color 0.3s;
+
+    &[aria-pressed='true'],
+    &:hover {
+      color: var(--elva-plum);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--elva-plum);
+      outline-offset: 1px;
+    }
+  }
+
+  &__col-icon {
+    @apply flex gap-[3px];
+    height: 16px;
+
+    i {
+      width: 4px;
+      height: 100%;
+      background: currentColor;
+    }
+  }
+
+  &__sort select {
+    @apply text-sm;
+    height: 40px;
+    border-radius: 0;
+    border-color: rgba(75, 29, 63, 0.25);
+    background-color: #fff;
+    padding-block: 0;
+  }
+
+  /* columns on large screens */
+  @screen lg {
+    &[data-cols='2'] .s-products-list-wrapper {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    &[data-cols='3'] .s-products-list-wrapper {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    &[data-cols='4'] .s-products-list-wrapper {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+
+    &--sidebar.elva-cat--has-filters[data-cols='4'] .s-products-list-wrapper {
+      gap: 1.25rem;
+    }
+  }
+
+  .s-products-list-wrapper {
+    row-gap: 2.25rem !important;
+  }
+}
+
+/* drawer style: the filters live in the side drawer on every screen */
+/* before the drawer script moves the filters into the off-canvas panel */
+.elva-cat--drawer .elva-cat__filters {
+  display: none;
+}

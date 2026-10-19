@@ -16,44 +16,90 @@
 | sort_options[].is_selected | bool        | Is current page sorted by it                                         |
 | search_query               | ?string     |                                                                      |
 #}
+{#
+  ELVA category page
+  - Category banner (uses the category image when there is one)
+  - Sub-category chips
+  - Toolbar: filter button, column switcher, sorting
+  - Filters as a sidebar or a drawer (theme setting)
+#}
 {% extends "layouts.master" %}
 {% block content %}
+	{% set filters_style = theme.settings.get('elva_filters_style', 'sidebar') %}
+	{% set default_cols = theme.settings.get('elva_grid_columns', '3') %}
+	{% set show_banner = theme.settings.get('elva_category_banner', true) %}
+	{% set cat_image = category.image is defined ? category.image : null %}
+
 	{% if theme.settings.get('product_index_show_breadcrumbs', true) %}
-		<div
-			class="container container--breadcrumbs">
-			{# add breadcumbs container in pages to make a space in case breadcrumbs is off #}
+		<div class="container container--breadcrumbs">
 			<nav class="breadcrumbs w-full py-5">
 				<salla-breadcrumb></salla-breadcrumb>
 			</nav>
 		</div>
 	{% endif %}
 
+	{% if show_banner %}
+		<header class="elva-cat-hero{{ cat_image ? ' elva-cat-hero--image' : '' }}">
+			{% if cat_image %}
+				<img class="elva-cat-hero__img" src="{{ cat_image }}" alt="" loading="eager" fetchpriority="high">
+				<span class="elva-cat-hero__shade" aria-hidden="true"></span>
+			{% endif %}
+			<div class="container elva-cat-hero__inner">
+				<h1 class="elva-cat-hero__title" id="page-main-title">{{ page.title|raw }}</h1>
+				<div class="elva-ornament" aria-hidden="true"><span></span></div>
+			</div>
+		</header>
+	{% endif %}
+
+	{% if category.sub_categories is defined and category.sub_categories|length %}
+		<nav class="container elva-cat-chips" aria-label="{{ page.title|striptags }}">
+			{% for sub in category.sub_categories %}
+				<a class="elva-cat-chips__item" href="{{ sub.url }}">
+					{% if sub.image %}<img src="{{ sub.image }}" alt="" loading="lazy">{% endif %}
+					<span>{{ sub.name }}</span>
+				</a>
+			{% endfor %}
+		</nav>
+	{% endif %}
+
 	{#
     Hook: product.index.before_products_group_with_filter
-    Fires before the products grid and filter sidebar wrapper.
-    Use this hook to inject content above the products listing area.
   #}
 	<div class="s-blocks-wrapper s-before-products-list !mt-0">{% hook 'product.index.before_products_group_with_filter' %}</div>
 
-	<div class="container container--products-list flex items-start flex-col md:flex-row">
+	<div class="container container--products-list elva-cat elva-cat--{{ filters_style == 'drawer' ? 'drawer' : 'sidebar' }}{{ filters ? ' elva-cat--has-filters' : '' }}"
+	     data-cols="{{ default_cols in ['2', '3', '4'] ? default_cols : '3' }}" data-filters-style="{{ filters_style }}">
 		{% if filters %}
-			<button class="btn--close-sm close-filters sicon-cancel hidden"></button>
-			<salla-filters data-testid="store-products-filters" class="md:w-72 lg:sticky lg:top-20 flex-none" id="filters-menu"></salla-filters>
+			<button class="btn--close-sm close-filters sicon-cancel hidden" aria-label="close"></button>
+			<salla-filters data-testid="store-products-filters" class="elva-cat__filters" id="filters-menu"></salla-filters>
 		{% endif %}
 
-		<div class="main-content flex-1 w-full {{ filters ? 'ltr:lg:ml-8 rtl:lg:mr-8' : '' }}">
-			<div class="mb-4 sm:mb-6 flex justify-between items-center">
-				<h1 class="font-bold text-xl rtl:pl-3 ltr:pr-3" id="page-main-title">{{ page.title|raw }}</h1>
-				<div class="flex items-center space-x-2 rtl:space-x-reverse">
+		<div class="main-content elva-cat__main">
+			<div class="elva-cat__toolbar">
+				{% if not show_banner %}
+					<h1 class="elva-cat__title" id="page-main-title">{{ page.title|raw }}</h1>
+				{% endif %}
+
+				<div class="elva-cat__tools">
 					{% if filters %}
-						<a data-testid="store-products-filters-mobile-trigger" href="#filters-menu" class="filters-trigger bg-border-color text-primary lg:hidden mt-2">
-							<i class="sicon-filter text-gray-text text-2xl me-2.5"></i>
+						<a data-testid="store-products-filters-mobile-trigger" href="#filters-menu" class="filters-trigger elva-cat__filter-btn">
+							<i class="sicon-filter" aria-hidden="true"></i>
+							<span>{{ trans('blocks.elva.filter') }}</span>
 						</a>
 					{% endif %}
+
+					<div class="elva-cat__cols" role="group" aria-label="{{ trans('blocks.elva.grid_view') }}">
+						{% for n in [2, 3, 4] %}
+							<button type="button" class="elva-cat__col-btn" data-elva-cols="{{ n }}" aria-label="{{ n }}" aria-pressed="false">
+								<span class="elva-cat__col-icon" aria-hidden="true">{% for i in range(1, n) %}<i></i>{% endfor %}</span>
+							</button>
+						{% endfor %}
+					</div>
+
 					{% if sort_options|length %}
-						<div class="flex items-center">
-							<label class="hidden sm:block rtl:ml-3 ltr:mr-3 whitespace-nowrap" for="product-filter">{{ trans('pages.categories.sorting') }}</label>
-							<select id="product-filter" class="form-input pt-0 pb-1 rtl:md:pl-10 ltr:md:pr-10">
+						<div class="elva-cat__sort">
+							<label class="sr-only" for="product-filter">{{ trans('pages.categories.sorting') }}</label>
+							<select id="product-filter" class="form-input">
 								{% for sort in sort_options %}
 									<option value="{{ sort.id }}" {{ sort.is_selected?'selected':'' }}>{{ sort.name }}</option>
 								{% endfor %}
@@ -65,14 +111,14 @@
 
 			{% hook 'product:index.items.start' %}
 
-			{# nothing is marked selected when the store default sort is disabled, so send the shown option with the first request #}
 			{% set sort_list = sort_options|default([]) %}
 			{% set first_sort = sort_list|first %}
 			{% set has_selected_sort = sort_list|filter(sort => sort.is_selected)|length %}
 			{% set fallback_sort = (sort_list|length and not has_selected_sort and first_sort.id != 'ourSuggest') ? first_sort.id : '' %}
 
+			<h2 class="sr-only">{{ trans('blocks.elva.products') }}</h2>
 			<div class="flex">
-				<salla-products-list data-testid="store-products-list" class="flex-1 min-w-0" source="{{ page.slug }}" source-value="{{ page.id }}" sort-by="{{ fallback_sort }}" {{ filters ?'filters-Results':'' }}></salla-products-list>
+				<salla-products-list data-testid="store-products-list" class="flex-1 min-w-0 elva-cat__list" source="{{ page.slug }}" source-value="{{ page.id }}" sort-by="{{ fallback_sort }}" includes='["images"]' {{ filters ?'filters-Results':'' }}></salla-products-list>
 			</div>
 
 			{% hook 'product:index.items.end' %}
@@ -81,8 +127,6 @@
 
 	{#
     Hook: product.index.after_products_group_with_filter
-    Fires after the products grid and filter sidebar wrapper.
-    Use this hook to inject content below the products listing area.
   #}
 	<div class="s-blocks-wrapper s-after-products-list">{% hook 'product.index.after_products_group_with_filter' %}</div>
 
@@ -92,8 +136,6 @@
 
 	{#
     Hook: product.index.after_testimonials
-    Fires after the testimonials (store reviews) section.
-    Use this hook to inject content below the testimonials area.
   #}
 	<div class="s-blocks-wrapper s-after-testimonials">{% hook 'product.index.after_testimonials' %}</div>
 {% endblock %}

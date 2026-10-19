@@ -1,4 +1,7 @@
 import BasePage from '../base-page';
+import { settings, t, icon, escapeHTML, discountPercent } from './elva-ui';
+import { openQuickView } from './elva-quick-view';
+
 class ProductCard extends HTMLElement {
   constructor(){
     super()
@@ -164,8 +167,142 @@ class ProductCard extends HTMLElement {
     .replace(/>/g, "&gt;");
   }
 
+  /**
+   * ELVA renders its own card for standard grid/slider cards; special layouts
+   * (horizontal, full image, minimal, special offer, donation) keep the base markup.
+   */
+  usesElvaCard() {
+    return !this.horizontal && !this.fullImage && !this.minimal && !this.isSpecial && !this.product?.donation;
+  }
+
+  elvaImages() {
+    const main = this.product?.image?.url || this.product?.thumbnail || '';
+    const list = (this.product?.images || [])
+      .filter((img) => img && img.url && (img.type || 'image') === 'image' && !img.video_url);
+    const second = list.find((img) => img.url !== main);
+    return { main: main || list[0]?.url || this.placeholder || '', second: second?.url || '' };
+  }
+
+  elvaBadges() {
+    const p = this.product;
+    const badges = [];
+    if (p?.preorder?.label) badges.push(['note', p.preorder.label]);
+    else if (p?.promotion_title) badges.push(['note', p.promotion_title]);
+    const pct = discountPercent(p);
+    if (pct) badges.push(['sale', `-${pct}%`]);
+    if (p?.is_out_of_stock) badges.push(['out', this.outOfStock || t('sold_out')]);
+    if (!badges.length) return '';
+    return `<div class="elva-pcard__badges">${badges
+      .map(([kind, text]) => `<span class="elva-pcard__badge elva-pcard__badge--${kind}"${kind === 'sale' ? ' dir="ltr"' : ''}>${escapeHTML(text)}</span>`)
+      .join('')}</div>`;
+  }
+
+  elvaPrice() {
+    const p = this.product;
+    if (p.is_on_sale) {
+      return `<div class="elva-pcard__price">
+          <span class="elva-pcard__price-now">${this.getPriceFormat(p.sale_price)}</span>
+          <span class="elva-pcard__price-was">${this.getPriceFormat(p?.regular_price)}</span>
+        </div>`;
+    }
+    if (p.starting_price) {
+      return `<div class="elva-pcard__price">
+          <span class="elva-pcard__price-from">${this.startingPrice || ''}</span>
+          <span class="elva-pcard__price-now">${this.getPriceFormat(p.starting_price)}</span>
+        </div>`;
+    }
+    return `<div class="elva-pcard__price"><span class="elva-pcard__price-now">${this.getPriceFormat(p?.price)}</span></div>`;
+  }
+
+  elvaAddButton(extraClass = '') {
+    if (this.hideAddBtn) return '';
+    const p = this.product;
+    return `<div class="elva-pcard__add ${extraClass}">
+        <salla-add-product-button width="wide"
+          product-id="${p.id}"
+          product-status="${this.effectiveStatus}"
+          product-type="${escapeHTML(p.type)}">
+          ${p.status == 'sale' ? `<i class="text-base sicon-${p.type == 'booking' ? 'calendar-time' : 'shopping-bag'}" aria-hidden="true"></i>` : ''}
+          <span>${escapeHTML(p.add_to_cart_label ? p.add_to_cart_label : this.getAddButtonLabel())}</span>
+        </salla-add-product-button>
+      </div>`;
+  }
+
+  renderElva() {
+    const s = settings();
+    const p = this.product;
+    const style = ['editorial', 'classic', 'overlay'].includes(s.cardStyle) ? s.cardStyle : 'editorial';
+    const { main, second } = this.elvaImages();
+    const hoverImage = s.cardHoverImage && second;
+    const fit = salla.url.is_placeholder(main) ? 'contain' : (this.fitImageHeight || 'cover');
+    const name = escapeHTML(p?.name);
+    const alt = escapeHTML(p?.image?.alt || p?.name);
+    const wishlistClass = this.isInWishlist ? 's-product-card-wishlist-added pulse-anime' : 'not-added un-favorited';
+
+    this.classList.add('s-product-card-entry', 'elva-pcard-host');
+    this.classList.toggle('s-product-card-out-of-stock', !!p?.is_out_of_stock);
+    this.setAttribute('id', p.id);
+    this.style.setProperty('--elva-ratio', s.cardRatio || '3/4');
+
+    this.innerHTML = `
+      <article class="elva-pcard elva-pcard--${style}${hoverImage ? ' elva-pcard--has-alt' : ''}${p?.is_out_of_stock ? ' elva-pcard--out' : ''}">
+        <div class="elva-pcard__media">
+          <a class="elva-pcard__frame" href="${p?.url}" aria-label="${name}">
+            <img class="elva-pcard__img elva-pcard__img--main elva-fit-${fit}" src="${escapeHTML(main)}" alt="${alt}" loading="lazy">
+            ${hoverImage ? `<img class="elva-pcard__img elva-pcard__img--alt elva-fit-${fit}" src="${escapeHTML(second)}" alt="" aria-hidden="true" loading="lazy">` : ''}
+            ${style === 'overlay' ? `<span class="elva-pcard__shade" aria-hidden="true"></span>` : ''}
+          </a>
+          ${this.elvaBadges()}
+          <div class="elva-pcard__tools">
+            <salla-button shape="icon" fill="outline" color="light"
+              name="product-name-${p.id}"
+              aria-label="Add or remove to wishlist"
+              class="s-product-card-wishlist-btn elva-pcard__tool animated ${wishlistClass}"
+              onclick="salla.wishlist.toggle(${p.id})"
+              data-id="${p.id}">
+              <i class="sicon-heart"></i>
+            </salla-button>
+            ${s.cardQuickView ? `<button type="button" class="elva-pcard__tool elva-pcard__qv" aria-label="${t('quick_view')}">${icon('eye', 18)}</button>` : ''}
+          </div>
+          ${style !== 'classic' ? this.elvaAddButton('elva-pcard__add--hover') : ''}
+        </div>
+        <div class="elva-pcard__body">
+          <h3 class="elva-pcard__title"><a href="${p?.url}">${name}</a></h3>
+          ${p?.subtitle ? `<p class="elva-pcard__subtitle">${escapeHTML(p.subtitle)}</p>` : ''}
+          <div class="elva-pcard__meta">
+            ${this.elvaPrice()}
+            ${p?.rating?.stars ? `<span class="elva-pcard__rating"><i class="sicon-star2" aria-hidden="true"></i>${p.rating.stars}</span>` : ''}
+          </div>
+          ${style === 'classic' ? this.elvaAddButton() : this.elvaAddButton('elva-pcard__add--touch')}
+        </div>
+      </article>`;
+
+    this.querySelector('.elva-pcard__qv')?.addEventListener('click', (e) => {
+      openQuickView(this.product, e.currentTarget, {
+        addLabel: this.getAddButtonLabel(),
+        money: (v) => this.getPriceFormat(v),
+      });
+    });
+
+    this.querySelectorAll('.s-product-card-wishlist-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const willBeAdded = !btn.classList.contains('s-product-card-wishlist-added');
+        app.toggleElementClassIf(btn, 's-product-card-wishlist-added', 'not-added', () => willBeAdded);
+        app.toggleElementClassIf(btn, 'pulse-anime', 'un-favorited', () => willBeAdded);
+      });
+    });
+  }
+
   render(){
-    this.classList.add('s-product-card-entry'); 
+    this.isInWishlist = !salla.config.isGuest() && salla.storage.get('salla::wishlist', []).includes(Number(this.product.id));
+    this.effectiveStatus = (this.product.is_out_of_stock && window.notify_when_available_in_card && !['donating', 'financial_support'].includes(this.product?.type))
+      ? 'out-and-notify'
+      : this.product.status;
+    if (this.usesElvaCard()) {
+      return this.renderElva();
+    }
+
+    this.classList.add('s-product-card-entry');
     this.setAttribute('id', this.product.id);
     !this.horizontal && !this.fullImage && !this.minimal? this.classList.add('s-product-card-vertical') : '';
     this.horizontal && !this.fullImage && !this.minimal? this.classList.add('s-product-card-horizontal') : '';

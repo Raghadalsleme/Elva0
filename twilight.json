@@ -34,7 +34,7 @@
             "type": "static",
             "format": "title",
             "id": "elva-static-label",
-            "value": "<div class='rounded-lg' style='background-color: #4B1D3F; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #E7DAC0;font-size: 15px; font-weight: bold;'> ألوان ELVA</h6></div>",
+            "value": "<div class='rounded-lg' style='background-color: #4B1D3F; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #E7DAC0;font-size: 15px; font-weight: bold;'> ألوان الثيم</h6></div>",
             "variant": "h6"
         },
         {
@@ -42,19 +42,19 @@
             "type": "items",
             "format": "dropdown-list",
             "label": "لوحة ألوان المتجر",
-            "description": "ألوان ELVA مأخوذة من الشعار (برقوقي، كريمي، وردي). اختر (لون المتجر) لاستخدام اللون الأساسي من إعدادات المتجر بدلاً منها.",
+            "description": "ألوان الثيم الأساسية (برقوقي، كريمي، وردي). اختر (لون المتجر من الإعدادات) لاستخدام اللون الأساسي الذي حددته في إعدادات متجرك بدلاً منها.",
             "labelHTML": null,
             "icon": "sicon-list",
             "selected": [
                 {
-                    "label": "ألوان ELVA (برقوقي #4B1D3F)",
+                    "label": "ألوان الثيم (برقوقي #4B1D3F)",
                     "value": "elva",
                     "key": "e1a7c0d2-4b1d-4f3f-9e7a-c0d8a7b1e1a7"
                 }
             ],
             "options": [
                 {
-                    "label": "ألوان ELVA (برقوقي #4B1D3F)",
+                    "label": "ألوان الثيم (برقوقي #4B1D3F)",
                     "value": "elva",
                     "key": "e1a7c0d2-4b1d-4f3f-9e7a-c0d8a7b1e1a7"
                 },
@@ -62,6 +62,324 @@
                     "label": "لون المتجر من الإعدادات",
                     "value": "store",
                     "key": "a3c5e7f9-1b2d-4e6f-8a0c-2e4f6a8c0e2f"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "type": "static",
+            "id": "elva-line-card",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "elva-title-card",
+            "variant": "h6",
+            "value": "<div class='rounded-lg' style='background-color: #4B1D3F; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #E7DAC0;font-size: 15px; font-weight: bold;'> بطاقة المنتج</h6></div>"
+        },
+        {
+            "id": "elva_card_style",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "شكل بطاقة المنتج",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "أنيق: النص في المنتصف وزر الإضافة يظهر عند المرور",
+                    "value": "editorial",
+                    "key": "28f15b07-791d-5f43-83bd-ae4085e4fef3"
+                }
+            ],
+            "options": [
+                {
+                    "label": "أنيق: النص في المنتصف وزر الإضافة يظهر عند المرور",
+                    "value": "editorial",
+                    "key": "28f15b07-791d-5f43-83bd-ae4085e4fef3"
+                },
+                {
+                    "label": "كلاسيكي: إطار وزر إضافة ظاهر دائماً",
+                    "value": "classic",
+                    "key": "4739f123-dd6b-52e3-a466-479299e7c679"
+                },
+                {
+                    "label": "فوق الصورة: الاسم والسعر على الصورة",
+                    "value": "overlay",
+                    "key": "ed4f812a-b6c3-599f-b2af-812663e96a2a"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "id": "elva_card_ratio",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "نسبة صورة المنتج",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "طولية 3:4 (مناسبة للأزياء)",
+                    "value": "3/4",
+                    "key": "8e9978c2-2e1c-5df8-b615-8a09840c51ec"
+                }
+            ],
+            "options": [
+                {
+                    "label": "طولية 3:4 (مناسبة للأزياء)",
+                    "value": "3/4",
+                    "key": "8e9978c2-2e1c-5df8-b615-8a09840c51ec"
+                },
+                {
+                    "label": "طولية أكثر 2:3",
+                    "value": "2/3",
+                    "key": "9915dec7-a090-5ba1-abba-a2a9ec166af3"
+                },
+                {
+                    "label": "مربعة 1:1",
+                    "value": "1/1",
+                    "key": "384186c7-3ffd-5eef-8dcb-b3a8370a52d2"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار الصورة الثانية عند المرور على المنتج",
+            "description": "تظهر الصورة الثانية للمنتج بدل الأولى عند مرور الماوس",
+            "id": "elva_card_hover_image",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "تفعيل العرض السريع",
+            "description": "زر يفتح نافذة فيها صور المنتج وسعره وزر الإضافة للسلة بدون مغادرة الصفحة",
+            "id": "elva_card_quickview",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "static",
+            "id": "elva-line-pdp",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "elva-title-pdp",
+            "variant": "h6",
+            "value": "<div class='rounded-lg' style='background-color: #4B1D3F; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #E7DAC0;font-size: 15px; font-weight: bold;'> صفحة المنتج</h6></div>"
+        },
+        {
+            "id": "elva_gallery_layout",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "طريقة عرض صور المنتج",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "معرض متتالي: صورة كبيرة وتحتها الصور بشبكة (في الجوال سلايدر)",
+                    "value": "stack",
+                    "key": "98253e7c-3ce9-5c87-9c95-6ba093038327"
+                }
+            ],
+            "options": [
+                {
+                    "label": "معرض متتالي: صورة كبيرة وتحتها الصور بشبكة (في الجوال سلايدر)",
+                    "value": "stack",
+                    "key": "98253e7c-3ce9-5c87-9c95-6ba093038327"
+                },
+                {
+                    "label": "سلايدر مع صور مصغرة",
+                    "value": "slider",
+                    "key": "ab43ba0d-54ef-51a9-b839-9f7577332600"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "type": "string",
+            "icon": "sicon-typography",
+            "label": "نص قسم الشحن والتوصيل",
+            "multilanguage": false,
+            "id": "elva_pdp_shipping",
+            "value": null,
+            "required": false,
+            "format": "textarea",
+            "description": "يظهر في صفحة كل منتج كقسم قابل للفتح. اتركه فارغاً لإخفاء القسم",
+            "placeholder": "أدخل النص هنا...",
+            "minLength": 0,
+            "maxLength": 500
+        },
+        {
+            "type": "string",
+            "icon": "sicon-typography",
+            "label": "نص قسم الاستبدال والاسترجاع",
+            "multilanguage": false,
+            "id": "elva_pdp_returns",
+            "value": null,
+            "required": false,
+            "format": "textarea",
+            "description": "يظهر في صفحة كل منتج كقسم قابل للفتح. اتركه فارغاً لإخفاء القسم",
+            "placeholder": "أدخل النص هنا...",
+            "minLength": 0,
+            "maxLength": 500
+        },
+        {
+            "type": "string",
+            "icon": "sicon-format-text-alt",
+            "label": "عنوان قسم المنتجات المشابهة",
+            "multilanguage": false,
+            "id": "elva_related_title",
+            "value": null,
+            "required": false,
+            "format": "text",
+            "description": "مثال: أكملي الإطلالة. اتركه فارغاً لاستخدام العنوان الافتراضي",
+            "placeholder": "أدخل النص هنا...",
+            "minLength": 0,
+            "maxLength": 80
+        },
+        {
+            "type": "static",
+            "id": "elva-line-cat",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "elva-title-cat",
+            "variant": "h6",
+            "value": "<div class='rounded-lg' style='background-color: #4B1D3F; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #E7DAC0;font-size: 15px; font-weight: bold;'> صفحة التصنيفات</h6></div>"
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار بانر التصنيف",
+            "description": "يعرض صورة التصنيف (إن وجدت) واسمه أعلى الصفحة",
+            "id": "elva_category_banner",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "id": "elva_filters_style",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "طريقة عرض الفلاتر",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "قائمة جانبية في الكمبيوتر",
+                    "value": "sidebar",
+                    "key": "863a0878-95ba-5355-bad6-d86bffd7ad08"
+                }
+            ],
+            "options": [
+                {
+                    "label": "قائمة جانبية في الكمبيوتر",
+                    "value": "sidebar",
+                    "key": "863a0878-95ba-5355-bad6-d86bffd7ad08"
+                },
+                {
+                    "label": "نافذة جانبية تفتح بزر (في كل الشاشات)",
+                    "value": "drawer",
+                    "key": "18a6f1ec-e2a2-5713-9c86-d354c9115cc7"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "id": "elva_grid_columns",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "عدد المنتجات في الصف (الكمبيوتر)",
+            "description": "يمكن للزائر تغييره من أزرار الأعمدة أعلى المنتجات",
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "3 منتجات",
+                    "value": "3",
+                    "key": "c3bb0000-ac41-5871-aa1d-c909a4134465"
+                }
+            ],
+            "options": [
+                {
+                    "label": "منتجين",
+                    "value": "2",
+                    "key": "8e2ac40d-2dce-5596-aa30-d2e5b52da1ba"
+                },
+                {
+                    "label": "3 منتجات",
+                    "value": "3",
+                    "key": "c3bb0000-ac41-5871-aa1d-c909a4134465"
+                },
+                {
+                    "label": "4 منتجات",
+                    "value": "4",
+                    "key": "cf14b945-8dfc-5a65-860e-0d4a2cc46dec"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "type": "static",
+            "id": "elva-line-header",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "elva-title-header",
+            "variant": "h6",
+            "value": "<div class='rounded-lg' style='background-color: #4B1D3F; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #E7DAC0;font-size: 15px; font-weight: bold;'> الهيدر</h6></div>"
+        },
+        {
+            "id": "elva_header_layout",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "تصميم الهيدر",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-layout-grid",
+            "selected": [
+                {
+                    "label": "الشعار في المنتصف والقائمة تحته (إلفا)",
+                    "value": "centered",
+                    "key": "c59d3171-643d-42d1-b900-15ea0ceac218"
+                }
+            ],
+            "options": [
+                {
+                    "label": "الشعار في المنتصف والقائمة تحته (إلفا)",
+                    "value": "centered",
+                    "key": "c59d3171-643d-42d1-b900-15ea0ceac218"
+                },
+                {
+                    "label": "الشعار والقائمة في سطر واحد",
+                    "value": "classic",
+                    "key": "56b224de-f20f-4006-83e4-c9bb4577e3dd"
                 }
             ],
             "source": "Manual",
@@ -328,8 +646,8 @@
         {
             "key": "0296dfee-cb4b-42b9-8104-950140a28480",
             "title": {
-                "en": "ELVA Hero",
-                "ar": "واجهة ELVA الرئيسية"
+                "ar": "الواجهة السينمائية",
+                "en": "Cinematic Hero"
             },
             "icon": "sicon-image",
             "path": "home.elva-hero",
@@ -339,7 +657,7 @@
                     "type": "static",
                     "format": "description",
                     "id": "elva-hero-note",
-                    "value": "<small>واجهة سينمائية بإطار الشعار: ارفع حتى 3 صور تتبدل تلقائياً مع حركة تكبير بطيئة، أو ضع رابط فيديو MP4. تعمل بدون صور أيضاً (خلفية برقوقية متحركة).</small>"
+                    "value": "<small>واجهة سينمائية بإطار مزدوج: ارفع حتى 3 صور تتبدل تلقائياً مع حركة تكبير بطيئة، أو ضع رابط فيديو MP4. تعمل بدون صور أيضاً (خلفية بلون الثيم متحركة).</small>"
                 },
                 {
                     "type": "string",
@@ -421,7 +739,7 @@
                     "label": "العنوان الرئيسي",
                     "multilanguage": true,
                     "id": "title",
-                    "value": "ELVA",
+                    "value": "مجموعة الموسم",
                     "required": false,
                     "format": "text",
                     "description": null,
@@ -435,7 +753,7 @@
                     "label": "سطر تحت العنوان",
                     "multilanguage": true,
                     "id": "eyebrow",
-                    "value": "FASHION HOUSE",
+                    "value": "NEW COLLECTION",
                     "required": false,
                     "format": "text",
                     "description": null,
@@ -449,7 +767,7 @@
                     "label": "نص توضيحي",
                     "multilanguage": true,
                     "id": "subtitle",
-                    "value": "أناقة تُروى بتفاصيلها",
+                    "value": "قطع مختارة بعناية لإطلالة لا تُنسى",
                     "required": false,
                     "format": "textarea",
                     "description": null,
@@ -463,7 +781,7 @@
                     "label": "نص الزر",
                     "multilanguage": true,
                     "id": "button_text",
-                    "value": "اكتشفي المجموعة",
+                    "value": "تسوّقي الآن",
                     "required": false,
                     "format": "text",
                     "description": null,
@@ -567,8 +885,8 @@
         {
             "key": "c24ea33e-d6eb-43e3-aa5c-dadae25da405",
             "title": {
-                "en": "ELVA Statement",
-                "ar": "بيان ELVA"
+                "ar": "البيان المتحرك",
+                "en": "Animated Statement"
             },
             "icon": "sicon-typography",
             "path": "home.elva-statement",
@@ -586,7 +904,7 @@
                     "label": "سطر صغير أعلى النص",
                     "multilanguage": true,
                     "id": "eyebrow",
-                    "value": "ELVA FASHION HOUSE",
+                    "value": "من نحن",
                     "required": false,
                     "format": "text",
                     "description": null,
@@ -600,7 +918,7 @@
                     "label": "النص",
                     "multilanguage": true,
                     "id": "text",
-                    "value": "لا نصمّم أزياءً فحسب، بل نصنع *حضوراً* يبقى في الذاكرة.",
+                    "value": "نؤمن أن الأناقة تبدأ من *التفاصيل*، لذلك نختار كل قطعة بعناية لتليق بكِ.",
                     "required": false,
                     "format": "textarea",
                     "description": "ضع الكلمة بين نجمتين *هكذا* لتظهر بلون مميز",
@@ -699,8 +1017,8 @@
         {
             "key": "a2f12d07-766d-4343-92e8-d6558bde5540",
             "title": {
-                "en": "ELVA Collections",
-                "ar": "مجموعات ELVA"
+                "ar": "بطاقات المجموعات",
+                "en": "Collection Cards"
             },
             "icon": "sicon-layout-grid-rearrange",
             "path": "home.elva-collections",
@@ -1032,8 +1350,8 @@
         {
             "key": "de8d695f-8ff7-4e4f-a281-749359e1d9d9",
             "title": {
-                "en": "ELVA Brand Story",
-                "ar": "قصة ELVA"
+                "ar": "قصة العلامة",
+                "en": "Brand Story"
             },
             "icon": "sicon-typography",
             "path": "home.elva-story",
@@ -1060,7 +1378,7 @@
                     "label": "سطر صغير أعلى العنوان",
                     "multilanguage": true,
                     "id": "eyebrow",
-                    "value": "ELVA FASHION HOUSE",
+                    "value": "قصتنا",
                     "required": false,
                     "format": "text",
                     "description": null,
@@ -1088,7 +1406,7 @@
                     "label": "النص",
                     "multilanguage": true,
                     "id": "text",
-                    "value": "في ELVA نؤمن أن الأناقة تبدأ من التفاصيل: قصّة مدروسة، خامة مختارة، ولمسة تبقى. نصمم قطعاً تُلبس بثقة وتُذكر طويلاً.",
+                    "value": "نصمم قطعاً تُلبس بثقة وتُذكر طويلاً: قصّة مدروسة، وخامة مختارة، ولمسة تبقى.",
                     "required": false,
                     "format": "textarea",
                     "description": null,
@@ -1323,8 +1641,8 @@
         {
             "key": "8af297da-5e5d-4a07-8b4a-f4f15e6fa217",
             "title": {
-                "en": "ELVA Promises",
-                "ar": "وعود ELVA"
+                "ar": "شريط المزايا",
+                "en": "Store Promises"
             },
             "icon": "sicon-award-ribbon",
             "path": "home.elva-promises",
@@ -2000,7 +2318,7 @@
     ],
     "support_url": "https://salla.com/",
     "description": {
-        "ar": "ثيم أنيق لدور الأزياء: لوحة ألوان البرقوقي والكريمي والوردي، خطوط سيريف راقية، وزخارف مستوحاة من شعار ELVA.",
-        "en": "An elegant fashion-house theme: plum, cream and dusty-rose palette, refined serif type, and ornaments drawn from the ELVA logo."
+        "ar": "ثيم أنيق لمتاجر الأزياء والعبايات والإكسسوارات: واجهة سينمائية، بطاقات منتجات بصورة ثانية عند المرور وعرض سريع، صفحة منتج بمعرض صور متتالي وأقسام قابلة للفتح، وصفحة تصنيفات ببانر وفلاتر جانبية أو منبثقة وتغيير عدد الأعمدة.",
+        "en": "An elegant theme for fashion, abaya and accessories stores: cinematic hero, product cards with hover image and quick view, a product page with an editorial gallery and accordions, and category pages with a banner, sidebar or drawer filters and a column switcher."
     }
 }

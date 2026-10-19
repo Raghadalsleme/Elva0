@@ -1,5 +1,6 @@
 import BasePage from './base-page';
 import MobileMenu from 'mmenu-light';
+import { safeStorage } from './partials/elva-ui';
 class Products extends BasePage {
     onReady() {
         let productsList = app.element('salla-products-list'),
@@ -26,6 +27,26 @@ class Products extends BasePage {
 
 
         this.initiateMobileMenu()
+        this.initColumnSwitcher()
+    }
+
+    /**
+     * ELVA column switcher: 2 / 3 / 4 products per row on large screens,
+     * remembered per visitor (falls back to the theme default when storage is unavailable).
+     */
+    initColumnSwitcher() {
+        const wrap = document.querySelector('.elva-cat');
+        if (!wrap) return;
+        const buttons = wrap.querySelectorAll('[data-elva-cols]');
+        const apply = (n) => {
+            wrap.dataset.cols = n;
+            buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.elvaCols === String(n))));
+        };
+        apply(safeStorage('elva:cols') || wrap.dataset.cols || '3');
+        buttons.forEach((b) => b.addEventListener('click', () => {
+            apply(b.dataset.elvaCols);
+            safeStorage('elva:cols', b.dataset.elvaCols);
+        }));
     }
 
     initiateMobileMenu() {
@@ -36,7 +57,9 @@ class Products extends BasePage {
         if (!filters) {
             return;
         }
-        filters = new MobileMenu(filters, "(max-width: 1024px)", "( slidingSubmenus: false)");
+        // ELVA: "drawer" style keeps the filters in a side drawer on every screen size
+        const asDrawer = document.querySelector('.elva-cat')?.dataset.filtersStyle === 'drawer';
+        filters = new MobileMenu(filters, asDrawer ? "all" : "(max-width: 1024px)", "( slidingSubmenus: false)");
         const drawer = filters.offcanvas({ position: salla.config.get('theme.is_rtl') ? "right" : 'left' });
         trigger.addEventListener('click', event => {
             document.body.classList.add('filters-opened');

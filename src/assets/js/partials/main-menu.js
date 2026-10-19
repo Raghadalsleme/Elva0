@@ -1,3 +1,5 @@
+import { t } from './elva-ui';
+
 class NavigationMenu extends HTMLElement {
     connectedCallback() {
         // Seed a skeleton placeholder shown until the menu data is fetched
@@ -264,7 +266,7 @@ class NavigationMenu extends HTMLElement {
     */
     render() {
         this.innerHTML =  `
-        <nav id="mobile-menu" class="mobile-menu">
+        <nav id="mobile-menu" class="mobile-menu" aria-label="${t('main_menu')}">
             <ul class="main-menu">${this.getMenus()}</ul>
             <button class="btn--close close-mobile-menu sicon-cancel lg:hidden"></button>
         </nav>

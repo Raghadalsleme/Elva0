@@ -24,7 +24,7 @@
 
     {% set display_all = component.display_all_url  %}
     <div class="container -mt-62 relative overflow-hidden">
-        <salla-products-slider
+        <salla-products-slider includes='["images"]'
             data-testid="store-home-slider-header-products"
             {% if component.products|length %}
               source="selected" 

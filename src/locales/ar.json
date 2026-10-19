@@ -5,6 +5,23 @@
     },
     "appBanner": {
       "download_now": "حمله الان"
+    },
+    "elva": {
+      "quick_view": "عرض سريع",
+      "view_details": "عرض التفاصيل الكاملة",
+      "close": "إغلاق",
+      "off": "خصم",
+      "sold_out": "نفدت الكمية",
+      "grid_view": "عدد الأعمدة",
+      "filter": "تصفية",
+      "previous_image": "الصورة السابقة",
+      "next_image": "الصورة التالية",
+      "product_details": "تفاصيل المنتج",
+      "shipping": "الشحن والتوصيل",
+      "returns": "الاستبدال والاسترجاع",
+      "products": "المنتجات",
+      "search": "بحث",
+      "main_menu": "القائمة الرئيسية"
     }
   },
   "pages": {

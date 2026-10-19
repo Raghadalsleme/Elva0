@@ -39,7 +39,7 @@
         {% for section in items %}
             <div id="{{ component_id }}-{{ section.id }}" class="tabs__item {{ loop.first?'is-active':'' }}">
                 {% if is_slider %}
-                    <salla-products-slider 
+                    <salla-products-slider includes='["images"]' 
                       slider-id="section-{{ section.id }}-slider" 
                       source="{{ section.products.source }}"
                       limit="{{ section.products.limit }}"
@@ -47,7 +47,7 @@
                       >
                     </salla-products-slider>
                 {% else %}
-                    <salla-products-list  
+                    <salla-products-list includes='["images"]'  
                       source="{{ section.products.source }}"
                       limit="{{ section.products.limit }}"
                       source-value="{{ section.products.source_value|json_encode }}"

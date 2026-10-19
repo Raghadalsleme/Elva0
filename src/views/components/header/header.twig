@@ -6,7 +6,8 @@
 | cart.total       | string  | Formatted total ex: "١٠٠ ر.س"   |
 #}
 {% set important_links = theme.settings.get('important_links') %}
-<header data-testid="store-header" class="store-header">
+{% set elva_header = theme.settings.get('elva_header_layout', 'centered') == 'classic' ? 'classic' : 'centered' %}
+<header data-testid="store-header" class="store-header elva-header elva-header--{{ elva_header }}">
   {# Bullet Delivery tag — mobile: own full-width row above the top nav
      (Figma "Mobile version"). Desktop keeps the inline pill below, next to
      scopes. Both instances self-gate on the same backend flag; `lg:hidden`
@@ -54,16 +55,21 @@
     </div>
   </div>
 
-  {# Main Nav #}
-  <div id="mainnav" class="main-nav-container shadow-default bg-white flex items-center">
+  {# Main Nav — ELVA: centred logo with the menu on its own row (default), or the original side-by-side layout #}
+  <div id="mainnav" class="main-nav-container shadow-default bg-white flex items-center elva-nav elva-nav--{{ elva_header }}">
       <div class="inner bg-inherit w-full">
           <div class="container">
-              <div class="flex items-stretch justify-between relative">
-                  <div class="flex items-center">
-                      <a data-testid="store-header-mobile-toggle" class="lg:hidden mburger mburger--collapse leading-none rtl:ml-4 ltr:mr-4" href="#mobile-menu" aria-label="Open-menu">
-                        <i class="sicon-menu text-primary text-2xl"></i>
+            {% if elva_header == 'centered' %}
+              <div class="elva-nav__bar relative">
+                  <div class="elva-nav__start">
+                      <a data-testid="store-header-mobile-toggle" class="lg:hidden mburger mburger--collapse leading-none elva-nav__icon" href="#mobile-menu" aria-label="Open-menu">
+                        <i class="sicon-menu text-2xl" aria-hidden="true"></i>
                       </a>
-                      <a data-testid="store-header-logo" class="navbar-brand" href="{{ store.url }}">
+                      <button type="button" class="elva-nav__icon elva-nav__search" onclick="salla.event.dispatch('search::open')" aria-label="{{ trans('blocks.elva.search') }}">
+                        <i class="sicon-search text-xl" aria-hidden="true"></i>
+                      </button>
+                  </div>
+                  <a data-testid="store-header-logo" class="navbar-brand elva-nav__brand" href="{{ store.url }}">
                           <img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ store.logo|cdn(175) }}" alt="{{ store.name }} logo">
                           {% if is_page('index') %}
                             <h1 class="sr-only">{{ store.name }}</h1>
@@ -71,15 +77,40 @@
                             <h2 class="sr-only">{{ store.name }}</h2>
                           {% endif %}
                       </a>
-                      <custom-main-menu></custom-main-menu>
-                  </div>
-                  <div class="flex items-center justify-end my-2.5">
+                  <div class="elva-nav__end">
                       <salla-user-menu data-testid="store-header-user-menu" avatar-only show-header show-trigger></salla-user-menu>
                       <salla-cart-summary data-testid="store-header-cart" class="ml-4 rtl:ml-[unset] rtl:mr-4">
                         <i slot="icon" class="header-btn__icon icon sicon-shopping-bag"></i>
                       </salla-cart-summary>
                   </div>
               </div>
+              <div class="elva-nav__menu">
+                  <custom-main-menu></custom-main-menu>
+              </div>
+            {% else %}
+                <div class="flex items-stretch justify-between relative">
+                    <div class="flex items-center">
+                        <a data-testid="store-header-mobile-toggle" class="lg:hidden mburger mburger--collapse leading-none rtl:ml-4 ltr:mr-4" href="#mobile-menu" aria-label="Open-menu">
+                          <i class="sicon-menu text-primary text-2xl"></i>
+                        </a>
+                        <a data-testid="store-header-logo" class="navbar-brand" href="{{ store.url }}">
+                            <img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ store.logo|cdn(175) }}" alt="{{ store.name }} logo">
+                            {% if is_page('index') %}
+                              <h1 class="sr-only">{{ store.name }}</h1>
+                            {% else %}
+                              <h2 class="sr-only">{{ store.name }}</h2>
+                            {% endif %}
+                        </a>
+                        <custom-main-menu></custom-main-menu>
+                    </div>
+                    <div class="flex items-center justify-end my-2.5">
+                        <salla-user-menu data-testid="store-header-user-menu" avatar-only show-header show-trigger></salla-user-menu>
+                        <salla-cart-summary data-testid="store-header-cart" class="ml-4 rtl:ml-[unset] rtl:mr-4">
+                          <i slot="icon" class="header-btn__icon icon sicon-shopping-bag"></i>
+                        </salla-cart-summary>
+                    </div>
+                </div>
+            {% endif %}
           </div>
       </div>
   </div>

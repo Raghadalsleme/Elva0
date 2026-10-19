@@ -74,6 +74,12 @@
         window.enable_more_menu = "{{ theme.settings.get('enable_more_menu', true) }}"
         window.enable_add_product_toast = "{{ theme.settings.get('enable_add_product_toast', true) }}"
         window.notify_when_available_in_card = "{{ theme.settings.get('notify_when_available_in_card', true) }}"
+        window.elvaSettings = {
+            cardStyle: {{ theme.settings.get('elva_card_style', 'editorial')|json_encode|raw }},
+            cardRatio: {{ theme.settings.get('elva_card_ratio', '3/4')|json_encode|raw }},
+            cardHoverImage: {{ theme.settings.get('elva_card_hover_image', true) ? 'true' : 'false' }},
+            cardQuickView: {{ theme.settings.get('elva_card_quickview', true) ? 'true' : 'false' }}
+        };
     </script>
     
     {% hook 'head:start' %}
@@ -125,6 +131,7 @@
             --elva-cream: #E7DAC0;
             --elva-cream-l: #FAF6EE;
             --elva-rose: #D8A7B1;
+            --elva-rose-d: #8E4A5D;
             --elva-rose-l: #F4E6E9;
             --elva-ink: #2B1626;
             /* Theme specific variables: crisp, tailored corners */

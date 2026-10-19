@@ -304,7 +304,6 @@ $elva-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 /* ---------- Statement ---------- */
 .elva-statement {
   @apply py-6 md:py-10;
-  --elva-rose-d: #a85d70;
 
   &--dark {
     @apply py-16 md:py-24;
@@ -385,7 +384,7 @@ $elva-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
 .elva-motion .elva-statement {
   .elva-word {
-    color: rgba(75, 29, 63, 0.16);
+    color: rgba(75, 29, 63, 0.54);
   }
 
   .elva-word.is-lit {
@@ -397,7 +396,7 @@ $elva-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
   &--dark .elva-word {
-    color: rgba(231, 218, 192, 0.2);
+    color: rgba(231, 218, 192, 0.48);
   }
 
   &--dark .elva-word.is-lit {
@@ -411,7 +410,7 @@ $elva-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
 /* accent without motion */
 .elva-word--accent {
-  color: var(--elva-rose-d, #a85d70);
+  color: var(--elva-rose-d, #8e4a5d);
 
   .elva-statement--dark & {
     color: var(--elva-rose);

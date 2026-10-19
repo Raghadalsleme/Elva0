@@ -5,6 +5,23 @@
     },
     "appBanner": {
       "download_now": "download now"
+    },
+    "elva": {
+      "quick_view": "Quick view",
+      "view_details": "View full details",
+      "close": "Close",
+      "off": "off",
+      "sold_out": "Sold out",
+      "grid_view": "Columns",
+      "filter": "Filter",
+      "previous_image": "Previous image",
+      "next_image": "Next image",
+      "product_details": "Product details",
+      "shipping": "Shipping & delivery",
+      "returns": "Exchanges & returns",
+      "products": "Products",
+      "search": "Search",
+      "main_menu": "Main menu"
     }
   },
   "pages": {
