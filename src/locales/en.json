@@ -21,7 +21,8 @@
       "returns": "Exchanges & returns",
       "products": "Products",
       "search": "Search",
-      "main_menu": "Main menu"
+      "main_menu": "Main menu",
+      "sub_categories": "Sub-categories"
     }
   },
   "pages": {
