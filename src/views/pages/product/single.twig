@@ -155,6 +155,7 @@
                             class="details-slider image-slider"
                             data-images='{{ product.images|json_encode }}'
                             type="thumbs"
+                            thumbs-config='{"slidesPerView": 5, "spaceBetween": 0, "watchSlidesProgress": true, "watchOverflow": true, "breakpoints": {"768": {"slidesPerView": 6, "spaceBetween": 0}}}'
                             loop="false"
                             auto-height
                             listen-to-thumbnails-option

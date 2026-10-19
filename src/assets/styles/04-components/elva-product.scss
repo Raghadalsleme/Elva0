@@ -687,17 +687,74 @@ html.elva-qv-open {
   }
 
   .details-slider {
-    background: var(--elva-rose-l);
+    background: transparent;
     border-radius: 0 !important;
+
+    .s-slider-container {
+      background: var(--elva-rose-l);
+      border: 0 !important;
+      border-radius: 0 !important;
+    }
+
+    .swiper-slide {
+      border-radius: 0 !important;
+      --tw-ring-shadow: 0 0 #0000 !important;
+    }
 
     .swiper-slide img {
       border-radius: 0 !important;
     }
 
-    [slot='thumbs'] img,
-    .s-slider-thumbs img {
+    /* thumbnails: portrait like the photos (Salla's default boxes are short and crop the garment) */
+    .s-slider-thumbs {
+      margin-top: 10px;
+    }
+
+    .s-slider-thumbs-container {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* gaps come from the slide padding (spaceBetween is 0), so Swiper's maths and Salla's margins never fight */
+    .s-slider-thumbs .s-slider-thumbs-container .swiper-slide {
+      margin: 0 !important;
+      padding: 0 4px;
+      height: auto !important;
+      background: transparent !important;
       border-radius: 0 !important;
-      background: var(--elva-rose-l);
+      opacity: 0.6;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.85;
+      }
+
+      /* Salla draws a rounded ring on a pseudo element; ELVA marks the active thumb on the image instead */
+      &::after {
+        display: none !important;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto !important;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 0 !important;
+        background: var(--elva-rose-l);
+        outline: 1px solid transparent;
+        outline-offset: -1px;
+        transition: outline-color 0.3s;
+      }
+    }
+
+    .s-slider-thumbs .s-slider-thumbs-container .swiper-slide-thumb-active {
+      opacity: 1;
+
+      img {
+        outline-color: var(--elva-plum);
+      }
     }
   }
 
@@ -1297,9 +1354,13 @@ html.elva-qv-open {
 
   /* gallery frames: a fine cream line around each shot, like the hero frame */
   .elva-pdp__shot,
-  .elva-pdp__slider .details-slider {
+  .elva-pdp__slider .details-slider .s-slider-container {
     outline: 1px solid rgba(231, 218, 192, 0.28);
     outline-offset: 5px;
+  }
+
+  .elva-pdp .details-slider .s-slider-thumbs .s-slider-thumbs-container .swiper-slide-thumb-active img {
+    outline-color: var(--elva-cream);
   }
 
   .elva-pdp__stack {
