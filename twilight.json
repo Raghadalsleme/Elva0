@@ -416,6 +416,101 @@
             "required": true
         },
         {
+            "type": "static",
+            "id": "elva-line-chat",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "elva-title-chat",
+            "variant": "h6",
+            "value": "<div class='rounded-lg' style='background-color: #4B1D3F; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #E7DAC0;font-size: 15px; font-weight: bold;'> زر المحادثة العائم</h6></div>"
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار زر واتساب العائم",
+            "description": "زر ثابت في زاوية الشاشة يفتح محادثة واتساب مع المتجر",
+            "id": "elva_chat_enabled",
+            "format": "switch",
+            "required": false,
+            "value": false,
+            "selected": false
+        },
+        {
+            "type": "string",
+            "icon": "sicon-phone",
+            "label": "رقم الواتساب",
+            "description": "بالصيغة الدولية بدون + أو أصفار، مثال: 9665XXXXXXXX",
+            "id": "elva_chat_number",
+            "format": "text",
+            "required": false,
+            "value": "",
+            "multilanguage": false,
+            "placeholder": "9665XXXXXXXX",
+            "minLength": 0,
+            "maxLength": 20
+        },
+        {
+            "type": "string",
+            "icon": "sicon-format-text-alt",
+            "label": "الرسالة الجاهزة",
+            "description": "تظهر للعميل مكتوبة في واتساب ويقدر يعدلها",
+            "id": "elva_chat_message",
+            "format": "text",
+            "required": false,
+            "value": "السلام عليكم، عندي استفسار",
+            "multilanguage": false,
+            "placeholder": "أدخل النص هنا...",
+            "minLength": 0,
+            "maxLength": 200
+        },
+        {
+            "type": "string",
+            "icon": "sicon-format-text-alt",
+            "label": "نص الزر",
+            "description": "يظهر جنب الأيقونة في الكمبيوتر",
+            "id": "elva_chat_label",
+            "format": "text",
+            "required": false,
+            "value": "تواصلي معنا",
+            "multilanguage": false,
+            "placeholder": "أدخل النص هنا...",
+            "minLength": 0,
+            "maxLength": 30
+        },
+        {
+            "id": "elva_chat_position",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "مكان الزر",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "يسار الشاشة",
+                    "value": "left",
+                    "key": "8b521303-4ce6-4e1a-9950-371432770ab9"
+                }
+            ],
+            "options": [
+                {
+                    "label": "يسار الشاشة",
+                    "value": "left",
+                    "key": "8b521303-4ce6-4e1a-9950-371432770ab9"
+                },
+                {
+                    "label": "يمين الشاشة",
+                    "value": "right",
+                    "key": "6e157f5f-c120-4092-9e27-66195745aa65"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
             "id": "squar_photo_bg_image_size",
             "type": "items",
             "format": "dropdown-list",
@@ -1665,6 +1760,200 @@
                     "required": false,
                     "minLength": 1,
                     "maxLength": 30
+                }
+            ]
+        },
+        {
+            "key": "275825eb-f272-42c1-8c4c-f716f5de3ef4",
+            "title": {
+                "ar": "الأسئلة الشائعة",
+                "en": "FAQ"
+            },
+            "icon": "sicon-chat-bubbles",
+            "path": "home.elva-faq",
+            "fields": [
+                {
+                    "type": "string",
+                    "icon": "sicon-format-text-alt",
+                    "label": "العنوان",
+                    "multilanguage": true,
+                    "id": "title",
+                    "value": "الأسئلة الشائعة",
+                    "required": false,
+                    "format": "text",
+                    "description": null,
+                    "placeholder": "أدخل النص هنا...",
+                    "minLength": 0,
+                    "maxLength": 100
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-typography",
+                    "label": "وصف قصير",
+                    "multilanguage": true,
+                    "id": "subtitle",
+                    "value": "كل ما تحتاجين معرفته قبل الطلب",
+                    "required": false,
+                    "format": "textarea",
+                    "description": null,
+                    "placeholder": "أدخل النص هنا...",
+                    "minLength": 0,
+                    "maxLength": 255
+                },
+                {
+                    "id": "items",
+                    "type": "collection",
+                    "format": "collection",
+                    "required": true,
+                    "minLength": 1,
+                    "maxLength": 12,
+                    "label": "الأسئلة",
+                    "item_label": "سؤال",
+                    "value": [
+                        {
+                            "items.question": "كم تستغرق مدة التوصيل؟",
+                            "items.answer": "يصل طلبك عادة خلال 2 إلى 5 أيام عمل داخل المملكة، وتصلك رسالة برقم الشحنة فور خروج الطلب."
+                        },
+                        {
+                            "items.question": "هل أقدر أستبدل أو أسترجع القطعة؟",
+                            "items.answer": "نعم، خلال 7 أيام من الاستلام بشرط أن تكون القطعة بحالتها الأصلية مع الملصقات."
+                        },
+                        {
+                            "items.question": "كيف أختار المقاس المناسب؟",
+                            "items.answer": "تجدين دليل المقاسات في صفحة كل منتج، ويسعدنا نساعدك إذا احترتِ بين مقاسين."
+                        },
+                        {
+                            "items.question": "ما طرق الدفع المتاحة؟",
+                            "items.answer": "تظهر لك كل طرق الدفع المتاحة في صفحة إتمام الطلب، مثل مدى والبطاقات الائتمانية وApple Pay."
+                        }
+                    ],
+                    "fields": [
+                        {
+                            "type": "string",
+                            "icon": "sicon-format-text-alt",
+                            "label": "السؤال",
+                            "multilanguage": true,
+                            "id": "items.question",
+                            "value": null,
+                            "required": false,
+                            "format": "text",
+                            "description": null,
+                            "placeholder": "أدخل النص هنا...",
+                            "minLength": 0,
+                            "maxLength": 160
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-typography",
+                            "label": "الإجابة",
+                            "multilanguage": true,
+                            "id": "items.answer",
+                            "value": null,
+                            "required": false,
+                            "format": "textarea",
+                            "description": null,
+                            "placeholder": "أدخل النص هنا...",
+                            "minLength": 0,
+                            "maxLength": 600
+                        }
+                    ]
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-format-text-alt",
+                    "label": "نص فوق زر التواصل",
+                    "multilanguage": true,
+                    "id": "help_text",
+                    "value": "ما لقيتي إجابتك؟",
+                    "required": false,
+                    "format": "text",
+                    "description": null,
+                    "placeholder": "أدخل النص هنا...",
+                    "minLength": 0,
+                    "maxLength": 100
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-format-text-alt",
+                    "label": "نص زر التواصل",
+                    "multilanguage": true,
+                    "id": "button_text",
+                    "value": "تواصلي معنا",
+                    "required": false,
+                    "format": "text",
+                    "description": null,
+                    "placeholder": "أدخل النص هنا...",
+                    "minLength": 0,
+                    "maxLength": 40
+                },
+                {
+                    "type": "items",
+                    "icon": "sicon-link",
+                    "label": "رابط زر التواصل",
+                    "id": "url",
+                    "value": null,
+                    "description": null,
+                    "required": false,
+                    "format": "variable-list",
+                    "searchable": true,
+                    "source": "custom",
+                    "sources": [
+                        {
+                            "label": "منتج",
+                            "key": "products",
+                            "value": "products"
+                        },
+                        {
+                            "label": "منتجات مع وسم",
+                            "key": "products_tags",
+                            "value": "products_tags"
+                        },
+                        {
+                            "label": "تصنيف",
+                            "key": "categories",
+                            "value": "categories"
+                        },
+                        {
+                            "label": "ماركة تجارية",
+                            "key": "brands",
+                            "value": "brands"
+                        },
+                        {
+                            "label": "صفحة تعريفية",
+                            "key": "pages",
+                            "value": "pages"
+                        },
+                        {
+                            "label": "مقالة",
+                            "key": "blog_articles",
+                            "value": "blog_articles"
+                        },
+                        {
+                            "label": "تصنيف ضمن المدونة",
+                            "key": "blog_categories",
+                            "value": "blog_categories"
+                        },
+                        {
+                            "label": "التخفيضات",
+                            "key": "offers_link",
+                            "value": "offers_link"
+                        },
+                        {
+                            "label": "الماركات التجارية",
+                            "key": "brands_link",
+                            "value": "brands_link"
+                        },
+                        {
+                            "label": "المدونة",
+                            "key": "blog_link",
+                            "value": "blog_link"
+                        },
+                        {
+                            "label": "رابط خارجي",
+                            "key": "custom",
+                            "value": "custom"
+                        }
+                    ]
                 }
             ]
         },

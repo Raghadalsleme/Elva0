@@ -451,6 +451,191 @@
   }
 }
 
+/* custom header marks (RTL mirrors the menu mark so the short line starts from the reading side) */
+.elva-nav__svg {
+  display: block;
+}
+
+[dir='rtl'] .elva-nav__svg--menu {
+  transform: scaleX(-1);
+}
+
+/* ---------- ELVA floating WhatsApp button ---------- */
+.elva-chat {
+  position: fixed;
+  z-index: 30;
+  bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 54px;
+  height: 54px;
+  border-radius: 9999px;
+  background: var(--elva-plum);
+  color: var(--elva-cream);
+  box-shadow: 0 16px 32px -14px rgba(43, 22, 38, 0.6);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  &--left {
+    left: 20px;
+  }
+
+  &--right {
+    right: 20px;
+  }
+
+  i {
+    font-size: 1.55rem;
+    line-height: 1;
+  }
+
+  &__label {
+    display: none;
+  }
+
+  &:hover {
+    background: var(--elva-plum-d);
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--elva-rose);
+    outline-offset: 3px;
+  }
+
+  @screen md {
+    width: auto;
+    padding: 0 20px 0 18px;
+
+    &__label {
+      display: inline;
+    }
+  }
+
+  /* keep clear of the sticky add-to-cart bar on phones */
+  @media (max-width: 767px) {
+    .is-sticky-product-bar &--raise {
+      bottom: 104px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elva-chat {
+    transition: none;
+  }
+}
+
+/* ---------- ELVA FAQ ---------- */
+.elva-faq {
+  &__grid {
+    @apply grid gap-8;
+    grid-template-columns: minmax(0, 1fr);
+
+    @screen lg {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+
+  &__head {
+    @apply flex flex-col items-start gap-4;
+
+    @screen lg {
+      position: sticky;
+      top: 120px;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    line-height: 1.2;
+    color: var(--elva-plum);
+    margin: 0;
+  }
+
+  &__subtitle {
+    color: rgba(43, 22, 38, 0.72);
+    line-height: 1.8;
+    max-width: 34ch;
+  }
+
+  &__help {
+    @apply flex flex-col items-start gap-3 mt-4;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(75, 29, 63, 0.12);
+
+    p {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--elva-plum);
+    }
+  }
+
+  &__list {
+    border-top: 1px solid rgba(75, 29, 63, 0.14);
+  }
+
+  &__item {
+    border-bottom: 1px solid rgba(75, 29, 63, 0.14);
+  }
+
+  &__q {
+    @apply flex items-center justify-between gap-6 cursor-pointer select-none;
+    padding: 22px 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.12rem;
+    line-height: 1.5;
+    color: var(--elva-ink);
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    /* plus that turns into a minus */
+    &::after {
+      content: '';
+      flex: none;
+      width: 14px;
+      height: 14px;
+      background:
+        linear-gradient(currentColor, currentColor) center / 14px 1.5px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 1.5px 14px no-repeat;
+      color: var(--elva-plum);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      color: var(--elva-plum);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--elva-plum);
+      outline-offset: 4px;
+    }
+  }
+
+  &__item[open] &__q::after {
+    background: linear-gradient(currentColor, currentColor) center / 14px 1.5px no-repeat;
+    transform: rotate(180deg);
+  }
+
+  &__a {
+    padding: 0 0 24px;
+    max-width: 62ch;
+    line-height: 1.9;
+    color: rgba(43, 22, 38, 0.78);
+  }
+}
+
 /* ---------- ELVA footer ---------- */
 .elva-footer {
   .store-footer__inner {

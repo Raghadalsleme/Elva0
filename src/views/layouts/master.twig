@@ -159,6 +159,20 @@
     </main>
     {% component 'footer.footer' %}
 </div>
+{# ELVA floating WhatsApp button (theme settings → زر المحادثة العائم) #}
+{% set elva_chat_number = theme.settings.get('elva_chat_number', '')|replace({'+': '', ' ': '', '-': ''}) %}
+{% if theme.settings.get('elva_chat_enabled', false) and elva_chat_number %}
+    {% set elva_chat_label = theme.settings.get('elva_chat_label', '') %}
+    <a class="elva-chat elva-chat--{{ theme.settings.get('elva_chat_position', 'left') == 'right' ? 'right' : 'left' }}{{ page.slug == 'product.single' ? ' elva-chat--raise' : '' }}"
+       href="https://wa.me/{{ elva_chat_number }}"
+       data-elva-chat-message="{{ theme.settings.get('elva_chat_message', '') }}"
+       target="_blank" rel="noopener"
+       aria-label="{{ elva_chat_label ? elva_chat_label : 'WhatsApp' }}">
+        <i class="sicon-whatsapp" aria-hidden="true"></i>
+        {% if elva_chat_label %}<span class="elva-chat__label">{{ elva_chat_label }}</span>{% endif %}
+    </a>
+    <script>(function(){var a=document.querySelector('[data-elva-chat-message]');if(!a)return;var m=a.getAttribute('data-elva-chat-message');if(m){a.href+='?text='+encodeURIComponent(m);}})();</script>
+{% endif %}
 {% hook 'body:end' %}
 {% if theme.settings.get('enable_add_product_toast', true) %}
     <salla-add-product-toast data-testid="store-add-product-toast"></salla-add-product-toast>

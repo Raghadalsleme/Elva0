@@ -1,0 +1,65 @@
+{#
+| Variable                   | Type     | Description                                                        |
+|----------------------------|----------|--------------------------------------------------------------------|
+| component                  | object   | Merchant settings for fields from twilight.json `components` entry |
+| component.title            | ?string  |                                                                    |
+| component.subtitle         | ?string  |                                                                    |
+| component.items            | object[] |                                                                    |
+| component.items[].question | ?string  |                                                                    |
+| component.items[].answer   | ?string  |                                                                    |
+| component.help_text        | ?string  | Line above the contact button, ex: "ما لقيتي إجابتك؟"              |
+| component.button_text      | ?string  |                                                                    |
+| component.url              | ?string  | Where the contact button goes                                      |
+| position                   | int      | Sorting number start from zero                                     |
+ELVA FAQ — heading column on one side, questions as accordions on the other.
+Also prints FAQPage structured data so search engines can show the answers.
+#}
+<section component-id="{{ componentId }}" data-testid="store-home-elva-faq" class="s-block container elva-faq">
+    <div class="elva-faq__grid">
+        <header class="elva-faq__head">
+            {% if component.title %}
+                <h2 class="elva-faq__title">{{ component.title }}</h2>
+            {% endif %}
+            <div class="elva-ornament" aria-hidden="true"><span></span></div>
+            {% if component.subtitle %}
+                <p class="elva-faq__subtitle">{{ component.subtitle }}</p>
+            {% endif %}
+            {% if component.button_text and component.url %}
+                <div class="elva-faq__help">
+                    {% if component.help_text %}<p>{{ component.help_text }}</p>{% endif %}
+                    <a href="{{ component.url }}" class="elva-btn elva-btn--plum">{{ component.button_text }}</a>
+                </div>
+            {% endif %}
+        </header>
+
+        <div class="elva-faq__list">
+            {% for item in component.items %}
+                {% if item.question %}
+                    <details class="elva-faq__item"{{ loop.first ? ' open' : '' }}>
+                        <summary class="elva-faq__q">{{ item.question }}</summary>
+                        {% if item.answer %}
+                            <div class="elva-faq__a">{{ item.answer|nl2br }}</div>
+                        {% endif %}
+                    </details>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    {% set faq_schema = component.items|filter(item => item.question and item.answer) %}
+    {% if faq_schema|length %}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {% for item in faq_schema %}{{ loop.first ? '' : ',' }}{
+                    "@type": "Question",
+                    "name": {{ item.question|json_encode|raw }},
+                    "acceptedAnswer": { "@type": "Answer", "text": {{ item.answer|json_encode|raw }} }
+                }{% endfor %}
+            ]
+        }
+        </script>
+    {% endif %}
+</section>

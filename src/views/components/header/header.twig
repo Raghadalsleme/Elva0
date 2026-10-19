@@ -63,10 +63,18 @@
               <div class="elva-nav__bar relative">
                   <div class="elva-nav__start">
                       <a data-testid="store-header-mobile-toggle" class="lg:hidden mburger mburger--collapse leading-none elva-nav__icon" href="#mobile-menu" aria-label="Open-menu">
-                        <i class="sicon-menu text-2xl" aria-hidden="true"></i>
+                        {# ELVA menu mark: two lines of different length and the brand diamond #}
+                        <svg class="elva-nav__svg elva-nav__svg--menu" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                            <path d="M4 9.5h18"/>
+                            <path d="M4 16.5h10.5"/>
+                            <path d="M19.5 14.3l2.2 2.2-2.2 2.2-2.2-2.2z" fill="currentColor" stroke="none"/>
+                        </svg>
                       </a>
                       <button type="button" class="elva-nav__icon elva-nav__search" onclick="salla.event.dispatch('search::open')" aria-label="{{ trans('blocks.elva.search') }}">
-                        <i class="sicon-search text-xl" aria-hidden="true"></i>
+                        <svg class="elva-nav__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                            <circle cx="10.5" cy="10.5" r="6.5"/>
+                            <path d="M15.5 15.5l4.5 4.5"/>
+                        </svg>
                       </button>
                   </div>
                   <a data-testid="store-header-logo" class="navbar-brand elva-nav__brand" href="{{ store.url }}">
