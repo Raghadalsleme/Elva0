@@ -87,6 +87,7 @@
 #}
 {#
   ELVA product page
+  - Style: "stage" (gallery on a plum spotlight stage, details on a cream hang tag) or "light"
   - Gallery: "stack" (editorial image column on desktop, swipe slider on phones) or "slider" (carousel + thumbnails)
   - Sticky information column with one price block, options, quantity and add to cart
   - Accordions: product details, shipping, returns (texts from theme settings)
@@ -99,9 +100,17 @@
     {% set shipping_text = theme.settings.get('elva_pdp_shipping', '') %}
     {% set returns_text = theme.settings.get('elva_pdp_returns', '') %}
     {% set related_title = theme.settings.get('elva_related_title', '') %}
+    {% set pdp_style = theme.settings.get('elva_pdp_style', 'stage') == 'light' ? 'light' : 'stage' %}
     {# discount badge text comes ready from Salla, ex: "20%" #}
     {% set discount = product.is_on_sale and product.discount_percentage ? product.discount_percentage : '' %}
 
+    {#
+        Hook: product.single.before_product_info
+        Fires before the main product information section (images, title, price, etc.).
+    #}
+    <div class="s-blocks-wrapper s-before-product-info !mt-0">{% hook 'product.single.before_product_info' %}</div>
+
+    <div class="elva-pdp-wrap elva-pdp-wrap--{{ pdp_style }}">
     {% if theme.settings.get('product_show_breadcrumbs', true) %}
       <div class="container container--breadcrumbs">
           <nav class="breadcrumbs w-full py-5">
@@ -109,12 +118,6 @@
           </nav>
       </div>
     {% endif %}
-
-    {#
-        Hook: product.single.before_product_info
-        Fires before the main product information section (images, title, price, etc.).
-    #}
-    <div class="s-blocks-wrapper s-before-product-info !mt-0">{% hook 'product.single.before_product_info' %}</div>
 
     <div class="container container--product-details elva-pdp elva-pdp--{{ use_stack ? 'stack' : 'slider' }}">
         <div class="elva-pdp__grid" id="product-{{ product.id }}">
@@ -212,7 +215,8 @@
 
             {# ---------------- Information ---------------- #}
             <div class="elva-pdp__info">
-                <div class="elva-pdp__sticky">
+                <div class="elva-pdp__sticky{{ pdp_style == 'stage' ? ' elva-tag' : '' }}">
+                    {% if pdp_style == 'stage' %}<span class="elva-tag__eyelet" aria-hidden="true"></span>{% endif %}
                     {% hook 'product:single.description.start' %}
 
                     <div class="elva-pdp__eyebrow-row">
@@ -415,6 +419,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    </div>{# /.elva-pdp-wrap #}
+
+    <div class="container">
         <salla-offer data-testid="store-product-offer"></salla-offer>
     </div>
 

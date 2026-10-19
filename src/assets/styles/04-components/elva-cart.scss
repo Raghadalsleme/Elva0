@@ -1,0 +1,319 @@
+/* =====================================================================
+   ELVA cart
+   An editorial list of pieces on the start side, and a printed receipt
+   (torn bottom edge) holding coupon, totals and checkout on the end side.
+   ===================================================================== */
+.elva-cart {
+  @apply pb-28 lg:pb-20;
+
+  &__head {
+    @apply flex items-center gap-3 mb-6 md:mb-9;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(75, 29, 63, 0.14);
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    line-height: 1.2;
+    color: var(--elva-plum);
+    margin: 0;
+  }
+
+  &__count {
+    @apply inline-flex items-center justify-center font-bold text-sm;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    border-radius: 9999px;
+    background: var(--elva-rose-l);
+    color: var(--elva-plum);
+  }
+
+  &__layout {
+    @apply grid items-start gap-10;
+    grid-template-columns: minmax(0, 1fr);
+
+    @screen lg {
+      grid-template-columns: minmax(0, 1fr) 400px;
+      gap: 3.5rem;
+    }
+  }
+
+  &__items {
+    min-width: 0;
+  }
+
+  &__aside {
+    @apply flex flex-col gap-5;
+
+    @screen lg {
+      position: sticky;
+      top: 110px;
+    }
+  }
+
+  &__panel {
+    background: #fff;
+    border: 1px solid rgba(75, 29, 63, 0.12);
+    padding: 8px;
+  }
+
+  /* empty bag */
+  &__empty {
+    @apply flex flex-col items-center text-center gap-4 py-16;
+    color: var(--elva-plum);
+
+    p {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+    }
+  }
+
+  &__empty-icon {
+    color: var(--elva-rose-d, #8e4a5d);
+  }
+
+  &__empty-btn {
+    border-radius: 0 !important;
+    min-height: 48px;
+    padding-inline: 28px;
+  }
+}
+
+/* one piece in the bag */
+.elva-citem-form + .elva-citem-form {
+  border-top: 1px solid rgba(75, 29, 63, 0.12);
+}
+
+.elva-citem {
+  @apply grid gap-4 sm:gap-6;
+
+  /* the cart script hides/shows rows with .hidden — never let a layout rule win over it */
+  .hidden {
+    display: none !important;
+  }
+
+  grid-template-columns: 96px minmax(0, 1fr);
+  padding: 22px 0;
+
+  @screen sm {
+    grid-template-columns: 128px minmax(0, 1fr);
+    padding: 28px 0;
+  }
+
+  &__media {
+    @apply relative block overflow-hidden self-start;
+    aspect-ratio: 3/4;
+    background: var(--elva-rose-l);
+
+    img {
+      @apply w-full h-full object-cover;
+    }
+  }
+
+  &__free {
+    @apply absolute inset-x-0 bottom-0 text-center text-xs font-bold py-1;
+    background: var(--elva-plum);
+    color: var(--elva-cream);
+  }
+
+  &__body {
+    @apply flex flex-col min-w-0;
+  }
+
+  &__top {
+    @apply flex items-start justify-between gap-3;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    line-height: 1.45;
+    margin: 0;
+
+    a {
+      color: var(--elva-ink);
+      transition: color 0.3s;
+
+      &:hover {
+        color: var(--elva-plum);
+      }
+    }
+  }
+
+  &__remove .s-button-element {
+    background: transparent !important;
+    border-color: transparent !important;
+    color: rgba(43, 22, 38, 0.7) !important;
+
+    &:hover {
+      background: var(--elva-rose-l) !important;
+      color: var(--elva-plum) !important;
+    }
+  }
+
+  &__prices {
+    @apply flex items-baseline gap-2 flex-wrap mt-1;
+
+    .item-price {
+      @apply font-bold text-base;
+      color: var(--elva-plum) !important;
+    }
+
+    .item-price.text-red-800,
+    .item-price.text-red-400 {
+      color: var(--elva-rose-d, #8e4a5d) !important;
+    }
+
+    .item-regular-price,
+    .item-original-price {
+      @apply text-sm line-through;
+      color: rgba(43, 22, 38, 0.66);
+    }
+  }
+
+  &__meta,
+  &__offer {
+    @apply flex items-center gap-1 text-sm mt-1;
+    color: rgba(43, 22, 38, 0.72);
+  }
+
+  &__options:empty {
+    display: none;
+  }
+
+  &__options {
+    @apply mt-3;
+  }
+
+  &__foot {
+    @apply flex items-center justify-between gap-4 flex-wrap mt-4;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(75, 29, 63, 0.16);
+  }
+
+  &__qty .s-quantity-input-container {
+    height: 44px;
+    border-radius: 0 !important;
+    border-color: rgba(75, 29, 63, 0.25) !important;
+    background: #fff;
+  }
+
+  &__total {
+    @apply flex items-baseline gap-2 text-sm;
+    margin: 0;
+
+    .item-total {
+      @apply font-bold text-base;
+      color: var(--elva-plum);
+    }
+  }
+
+  &__total-label {
+    color: rgba(43, 22, 38, 0.72);
+  }
+}
+
+/* free shipping progress */
+.elva-ship {
+  background: #fff;
+  border: 1px solid rgba(75, 29, 63, 0.12);
+  padding: 18px 20px;
+
+  &__msg {
+    @apply flex items-start gap-3 text-sm leading-6;
+    margin: 0;
+    color: rgba(43, 22, 38, 0.8);
+
+    > i {
+      @apply text-xl;
+      color: var(--elva-rose-d, #8e4a5d);
+    }
+
+    b {
+      @apply block;
+      color: var(--elva-plum);
+    }
+  }
+
+  &__track {
+    height: 4px;
+    margin-top: 14px;
+    background: var(--elva-rose-l);
+    overflow: hidden;
+  }
+
+  &__fill {
+    height: 100%;
+    background: var(--elva-plum);
+    transition: width 0.5s ease;
+  }
+}
+
+/* the receipt */
+.elva-receipt {
+  position: relative;
+  background: #fff;
+  padding: 26px 22px 30px;
+  margin-bottom: 12px;
+  box-shadow: 0 22px 40px -28px rgba(75, 29, 63, 0.35);
+
+  @screen sm {
+    padding-inline: 28px;
+  }
+
+  /* torn edge */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: conic-gradient(from -45deg at bottom, #fff 90deg, transparent 0) 0 0 / 16px 10px repeat-x;
+  }
+
+  &__title {
+    @apply text-center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: var(--elva-plum);
+    margin: 0 0 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed rgba(75, 29, 63, 0.25);
+  }
+
+  &__coupon {
+    min-width: 0;
+
+    input {
+      min-width: 0;
+    }
+
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(75, 29, 63, 0.25);
+  }
+
+  salla-cart-summary-card {
+    display: block;
+  }
+
+  /* the summary card lives inside the receipt, so it needs no card of its own */
+  salla-cart-summary-card > div,
+  [class*='summary-card'] {
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  .s-button-element {
+    border-radius: 0 !important;
+    min-height: 52px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+}

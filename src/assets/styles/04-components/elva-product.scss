@@ -1253,3 +1253,128 @@ html.elva-qv-open {
 .elva-cat--drawer .elva-cat__filters {
   display: none;
 }
+
+/* =====================================================================
+   Product page — "stage" style
+   The gallery sits on a plum stage under a soft spotlight (the same
+   motif as the home hero); the buying details hang on a cream tag.
+   ===================================================================== */
+.elva-pdp-wrap--stage {
+  position: relative;
+  color: var(--elva-cream);
+  background:
+    radial-gradient(ellipse 48% 60% at 72% -8%, rgba(216, 167, 177, 0.26), transparent 70%),
+    linear-gradient(180deg, var(--elva-plum) 0%, var(--elva-plum-d) 100%);
+  padding-bottom: 3rem;
+  margin-bottom: 2.5rem;
+
+  [dir='ltr'] & {
+    background:
+      radial-gradient(ellipse 48% 60% at 28% -8%, rgba(216, 167, 177, 0.26), transparent 70%),
+      linear-gradient(180deg, var(--elva-plum) 0%, var(--elva-plum-d) 100%);
+  }
+
+  @screen md {
+    padding-bottom: 4.5rem;
+  }
+
+  /* breadcrumbs read light on the stage */
+  .breadcrumbs,
+  .breadcrumbs a,
+  .breadcrumbs li,
+  .breadcrumbs span,
+  .breadcrumbs i {
+    color: rgba(231, 218, 192, 0.85) !important;
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--elva-cream) !important;
+  }
+
+  .container--product-details {
+    padding-top: 0.5rem;
+  }
+
+  /* gallery frames: a fine cream line around each shot, like the hero frame */
+  .elva-pdp__shot,
+  .elva-pdp__slider .details-slider {
+    outline: 1px solid rgba(231, 218, 192, 0.28);
+    outline-offset: 5px;
+  }
+
+  .elva-pdp__stack {
+    gap: 1.25rem;
+  }
+
+  .elva-pdp__badge {
+    background: var(--elva-cream);
+  }
+
+  .elva-pdp__badge--sale {
+    background: var(--elva-rose);
+    color: var(--elva-plum-d);
+  }
+}
+
+/* the hang tag */
+.elva-tag {
+  position: relative;
+  isolation: isolate;
+  color: var(--elva-ink);
+  padding: 2.75rem 1.25rem 1.5rem;
+
+  /* the tag shape (chamfered top corners) is drawn behind the content,
+     so dropdowns and pop-ups inside the tag are never clipped */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--elva-cream-l);
+    clip-path: polygon(26px 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%, 0 26px);
+  }
+
+  @screen sm {
+    padding-inline: 2rem;
+  }
+
+  @screen lg {
+    padding: 3.25rem 2.5rem 2rem;
+  }
+
+  &__eyelet {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    border-radius: 9999px;
+    background: var(--elva-plum-d);
+    box-shadow:
+      0 0 0 4px var(--elva-cream),
+      0 0 0 5px rgba(75, 29, 63, 0.22);
+  }
+
+  .elva-pdp__price {
+    border-bottom-style: dashed;
+  }
+
+  .elva-acc:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* phones: the tag hangs just under the gallery */
+@media (max-width: 767px) {
+  .elva-pdp-wrap--stage {
+    .elva-pdp__grid {
+      gap: 1.5rem;
+    }
+
+    .elva-pdp__info {
+      position: relative;
+      z-index: 3;
+    }
+  }
+}

@@ -91,6 +91,12 @@ class Cart extends BasePage {
         app.sallaGifting?.toggleAttribute('physical-products', cartData?.gift?.type === 'physical');
         app.sallaGifting?.toggleAttribute('digital-products', cartData?.gift?.type === 'digital');
 
+        // ELVA: keep the item count next to the page title in sync
+        let countEl = document.querySelector('[data-elva-cart-count]');
+        if (countEl && cartData.items) {
+            countEl.textContent = cartData.items.length;
+        }
+
         // update the dom for cart options
         this.updateCartOptions(cartData?.options);
         // update each item data

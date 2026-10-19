@@ -184,6 +184,36 @@
             "value": "<div class='rounded-lg' style='background-color: #4B1D3F; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #E7DAC0;font-size: 15px; font-weight: bold;'> صفحة المنتج</h6></div>"
         },
         {
+            "id": "elva_pdp_style",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "شكل صفحة المنتج",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-layout-grid-rearrange",
+            "selected": [
+                {
+                    "label": "مسرح: الصور على خلفية بنفسجية والتفاصيل على بطاقة كبطاقة الملابس",
+                    "value": "stage",
+                    "key": "5a887b85-5c91-4cea-b27a-2a933fc03f2a"
+                }
+            ],
+            "options": [
+                {
+                    "label": "مسرح: الصور على خلفية بنفسجية والتفاصيل على بطاقة كبطاقة الملابس",
+                    "value": "stage",
+                    "key": "5a887b85-5c91-4cea-b27a-2a933fc03f2a"
+                },
+                {
+                    "label": "فاتح: خلفية فاتحة بالكامل",
+                    "value": "light",
+                    "key": "eea3928d-e4e4-4896-9c72-61d3d13ac400"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
             "id": "elva_gallery_layout",
             "type": "items",
             "format": "dropdown-list",
