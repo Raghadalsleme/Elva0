@@ -861,6 +861,23 @@ html.elva-qv-open {
       flex: 1 1 200px;
     }
 
+    /* phones: quantity + wishlist on one line, add to cart (and quick buy) full width under them */
+    @media (max-width: 767px) {
+      .elva-pdp__qty {
+        flex: 1 1 auto;
+
+        salla-quantity-input,
+        .s-quantity-input-container {
+          width: 100%;
+        }
+      }
+
+      salla-add-product-button {
+        flex-basis: 100%;
+        order: 3;
+      }
+    }
+
     salla-add-product-button .s-button-element {
       width: 100%;
     }
@@ -1020,6 +1037,16 @@ html.elva-qv-open {
     color: var(--elva-plum);
   }
 
+  &__count {
+    @apply text-sm;
+    letter-spacing: 0.06em;
+    color: rgba(75, 29, 63, 0.8);
+
+    &:empty {
+      display: none;
+    }
+  }
+
   &--image {
     background: var(--elva-plum);
     min-height: 260px;
@@ -1035,6 +1062,10 @@ html.elva-qv-open {
 
     .elva-cat-hero__title {
       color: #fff;
+    }
+
+    .elva-cat-hero__count {
+      color: var(--elva-cream);
     }
 
     .elva-ornament {
@@ -1111,6 +1142,14 @@ html.elva-qv-open {
     font-weight: 600;
     font-size: 1.6rem;
     color: var(--elva-plum);
+  }
+
+  &__count {
+    font-family: var(--font-main, inherit);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(75, 29, 63, 0.8);
+    margin-inline-start: 6px;
   }
 
   &__tools {

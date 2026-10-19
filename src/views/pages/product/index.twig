@@ -45,8 +45,10 @@
 				<span class="elva-cat-hero__shade" aria-hidden="true"></span>
 			{% endif %}
 			<div class="container elva-cat-hero__inner">
-				<h1 class="elva-cat-hero__title" id="page-main-title">{{ page.title|raw }}</h1>
+				<h1 class="elva-cat-hero__title">{{ page.title|raw }}</h1>
 				<div class="elva-ornament" aria-hidden="true"><span></span></div>
+				{# products.js writes the results count here (ex: "3 منتجات") so the category name stays as the title #}
+				<p class="elva-cat-hero__count" id="page-main-title" aria-live="polite"></p>
 			</div>
 		</header>
 	{% endif %}
@@ -77,7 +79,7 @@
 		<div class="main-content elva-cat__main">
 			<div class="elva-cat__toolbar">
 				{% if not show_banner %}
-					<h1 class="elva-cat__title" id="page-main-title">{{ page.title|raw }}</h1>
+					<h1 class="elva-cat__title">{{ page.title|raw }} <small class="elva-cat__count" id="page-main-title" aria-live="polite"></small></h1>
 				{% endif %}
 
 				<div class="elva-cat__tools">
