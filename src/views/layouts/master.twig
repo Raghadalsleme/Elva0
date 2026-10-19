@@ -159,6 +159,53 @@
     </main>
     {% component 'footer.footer' %}
 </div>
+{# ELVA welcome offer: discount code under a scratch foil (theme settings → نافذة كود الخصم) #}
+{% set elva_promo_code = theme.settings.get('elva_promo_code', '')|trim %}
+{% if theme.settings.get('elva_promo_enabled', false) and elva_promo_code and page.slug != 'cart' %}
+    {% set elva_promo_style = theme.settings.get('elva_promo_style', 'scratch') == 'reveal' ? 'reveal' : 'scratch' %}
+    {% set elva_promo_title = theme.settings.get('elva_promo_title', '') %}
+    {% set elva_promo_text = theme.settings.get('elva_promo_text', '') %}
+    {% set elva_promo_note = theme.settings.get('elva_promo_note', '') %}
+    <dialog class="elva-promo elva-promo--{{ elva_promo_style }}" data-elva-promo aria-labelledby="elva-promo-title"
+            data-code="{{ elva_promo_code }}"
+            data-style="{{ elva_promo_style }}"
+            data-delay="{{ theme.settings.get('elva_promo_delay', '3') }}"
+            data-frequency="{{ theme.settings.get('elva_promo_frequency', 'once') }}"
+            data-scratch-text="{{ trans('blocks.elva.promo_scratch') }}"
+            data-copied-text="{{ trans('blocks.elva.promo_copied') }}"
+            data-revealed-text="{{ trans('blocks.elva.promo_revealed') }}">
+        <div class="elva-promo__panel">
+            <span class="elva-tag__eyelet" aria-hidden="true"></span>
+            <button type="button" class="elva-promo__close" data-elva-promo-close aria-label="{{ trans('blocks.elva.close') }}">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+            <h2 id="elva-promo-title" class="elva-promo__title">{{ elva_promo_title ? elva_promo_title : trans('blocks.elva.promo_default_title') }}</h2>
+            <div class="elva-ornament" aria-hidden="true"><span></span></div>
+            {% if elva_promo_text %}<p class="elva-promo__text">{{ elva_promo_text }}</p>{% endif %}
+
+            <div class="elva-promo__card">
+                <span class="elva-promo__code" dir="ltr" aria-hidden="true">{{ elva_promo_code }}</span>
+                {% if elva_promo_style == 'scratch' %}
+                    <canvas class="elva-promo__scratch" aria-hidden="true"></canvas>
+                {% else %}
+                    <span class="elva-promo__cover" aria-hidden="true">{{ trans('blocks.elva.promo_cover') }}</span>
+                {% endif %}
+            </div>
+
+            <div class="elva-promo__actions">
+                {% if elva_promo_style == 'reveal' %}
+                    <button type="button" class="elva-btn elva-btn--plum elva-promo__main" data-elva-promo-reveal>{{ trans('blocks.elva.promo_reveal') }}</button>
+                {% endif %}
+                <button type="button" class="elva-btn elva-btn--plum elva-promo__main elva-promo__copy" data-elva-promo-copy disabled>{{ trans('blocks.elva.promo_copy') }}</button>
+                {% if elva_promo_style == 'scratch' %}
+                    <button type="button" class="elva-promo__link" data-elva-promo-reveal>{{ trans('blocks.elva.promo_reveal_alt') }}</button>
+                {% endif %}
+            </div>
+            {% if elva_promo_note %}<p class="elva-promo__note">{{ elva_promo_note }}</p>{% endif %}
+            <p class="elva-promo__status sr-only" aria-live="polite"></p>
+        </div>
+    </dialog>
+{% endif %}
 {# ELVA floating WhatsApp button (theme settings → زر المحادثة العائم) #}
 {% set elva_chat_number = theme.settings.get('elva_chat_number', '')|replace({'+': '', ' ': '', '-': ''}) %}
 {% if theme.settings.get('elva_chat_enabled', false) and elva_chat_number %}

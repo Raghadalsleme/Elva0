@@ -511,6 +511,180 @@
             "required": true
         },
         {
+            "type": "static",
+            "id": "elva-line-promo",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "elva-title-promo",
+            "variant": "h6",
+            "value": "<div class='rounded-lg' style='background-color: #4B1D3F; display: flex; justify-content: center; align-items: center;padding: 15px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;'><h6 style='color: #E7DAC0;font-size: 15px; font-weight: bold;'> نافذة كود الخصم</h6></div>"
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار نافذة كود الخصم",
+            "description": "تظهر للزائرة عند دخول المتجر. أنشئي الكوبون أولاً من لوحة سلة: التسويق ← كوبونات التخفيض",
+            "id": "elva_promo_enabled",
+            "format": "switch",
+            "required": false,
+            "value": false,
+            "selected": false
+        },
+        {
+            "type": "string",
+            "icon": "sicon-format-text-alt",
+            "label": "كود الخصم",
+            "description": "نفس الكود اللي أنشأتيه في سلة بالضبط، مثال: WELCOME10",
+            "id": "elva_promo_code",
+            "format": "text",
+            "required": false,
+            "value": "",
+            "multilanguage": false,
+            "placeholder": "أدخل النص هنا...",
+            "minLength": 0,
+            "maxLength": 30
+        },
+        {
+            "id": "elva_promo_style",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "طريقة كشف الكود",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "بطاقة تقشطها العميلة لتكشف الكود",
+                    "value": "scratch",
+                    "key": "0f4d4294-1712-44b0-ae14-4022d8633b4b"
+                }
+            ],
+            "options": [
+                {
+                    "label": "بطاقة تقشطها العميلة لتكشف الكود",
+                    "value": "scratch",
+                    "key": "0f4d4294-1712-44b0-ae14-4022d8633b4b"
+                },
+                {
+                    "label": "زر يكشف الكود",
+                    "value": "reveal",
+                    "key": "3175455f-0d72-4f3c-84f3-181bc1e9269e"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "type": "string",
+            "icon": "sicon-format-text-alt",
+            "label": "العنوان",
+            "description": null,
+            "id": "elva_promo_title",
+            "format": "text",
+            "required": false,
+            "value": "هدية ترحيبية لكِ",
+            "multilanguage": false,
+            "placeholder": "أدخل النص هنا...",
+            "minLength": 0,
+            "maxLength": 60
+        },
+        {
+            "type": "string",
+            "icon": "sicon-format-text-alt",
+            "label": "النص",
+            "description": null,
+            "id": "elva_promo_text",
+            "format": "text",
+            "required": false,
+            "value": "اقشطي البطاقة واكتشفي خصمك على أول طلب",
+            "multilanguage": false,
+            "placeholder": "أدخل النص هنا...",
+            "minLength": 0,
+            "maxLength": 160
+        },
+        {
+            "type": "string",
+            "icon": "sicon-format-text-alt",
+            "label": "ملاحظة صغيرة",
+            "description": "مثال: صالح لمرة واحدة عند إتمام الطلب",
+            "id": "elva_promo_note",
+            "format": "text",
+            "required": false,
+            "value": "",
+            "multilanguage": false,
+            "placeholder": "أدخل النص هنا...",
+            "minLength": 0,
+            "maxLength": 120
+        },
+        {
+            "id": "elva_promo_delay",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "متى تظهر النافذة",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "بعد 3 ثواني",
+                    "value": "3",
+                    "key": "55e8e340-e78e-4d7d-b462-da85a1307f1e"
+                }
+            ],
+            "options": [
+                {
+                    "label": "فوراً",
+                    "value": "0",
+                    "key": "5c5de3ae-500b-4c30-9184-49142bbd1e22"
+                },
+                {
+                    "label": "بعد 3 ثواني",
+                    "value": "3",
+                    "key": "55e8e340-e78e-4d7d-b462-da85a1307f1e"
+                },
+                {
+                    "label": "بعد 8 ثواني",
+                    "value": "8",
+                    "key": "4cecb059-fef3-493f-8a7e-570aeac132b7"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "id": "elva_promo_frequency",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "كم مرة تظهر",
+            "description": null,
+            "labelHTML": null,
+            "icon": "sicon-list",
+            "selected": [
+                {
+                    "label": "مرة واحدة لكل زائرة",
+                    "value": "once",
+                    "key": "a38ea7b6-99bf-4ed7-9a6e-9cd1c17eb816"
+                }
+            ],
+            "options": [
+                {
+                    "label": "مرة واحدة لكل زائرة",
+                    "value": "once",
+                    "key": "a38ea7b6-99bf-4ed7-9a6e-9cd1c17eb816"
+                },
+                {
+                    "label": "في كل زيارة جديدة",
+                    "value": "session",
+                    "key": "56dbce70-87ad-479a-9aad-e52caaa9ed7c"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
             "id": "squar_photo_bg_image_size",
             "type": "items",
             "format": "dropdown-list",

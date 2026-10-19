@@ -24,7 +24,15 @@
       "main_menu": "القائمة الرئيسية",
       "sub_categories": "التصنيفات الفرعية",
       "remove": "إزالة من السلة",
-      "order_summary": "ملخص الطلب"
+      "order_summary": "ملخص الطلب",
+      "promo_scratch": "اقشطي هنا ✦",
+      "promo_copy": "نسخ الكود",
+      "promo_copied": "تم نسخ الكود",
+      "promo_revealed": "كود الخصم:",
+      "promo_reveal": "اكشفي الكود",
+      "promo_reveal_alt": "اكشفي الكود بدون قشط",
+      "promo_cover": "هديتك هنا",
+      "promo_default_title": "هدية ترحيبية لكِ"
     }
   },
   "pages": {

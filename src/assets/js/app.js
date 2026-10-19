@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import Anime from './partials/anime';
 import initTootTip from './partials/tooltip';
 import AppHelpers from "./app-helpers";
+import { initPromo } from './partials/elva-promo';
 
 class App extends AppHelpers {
   constructor() {
@@ -34,6 +35,9 @@ class App extends AppHelpers {
     this.loadModalImgOnclick();
 
     salla.comment.event.onAdded(() => window.location.reload());
+
+    // ELVA welcome offer (scratch card / reveal)
+    try { initPromo(); } catch (e) { this.log('ELVA promo skipped', e); }
 
     this.status = 'ready';
     document.dispatchEvent(new CustomEvent('theme::ready'));

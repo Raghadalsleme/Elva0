@@ -24,7 +24,15 @@
       "main_menu": "Main menu",
       "sub_categories": "Sub-categories",
       "remove": "Remove from bag",
-      "order_summary": "Order summary"
+      "order_summary": "Order summary",
+      "promo_scratch": "Scratch here ✦",
+      "promo_copy": "Copy code",
+      "promo_copied": "Code copied",
+      "promo_revealed": "Discount code:",
+      "promo_reveal": "Reveal the code",
+      "promo_reveal_alt": "Reveal without scratching",
+      "promo_cover": "Your gift is here",
+      "promo_default_title": "A welcome gift for you"
     }
   },
   "pages": {
