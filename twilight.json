@@ -703,7 +703,7 @@
                 {
                     "label": "تغطية الصورة كامل المساحة مع المحافظة على أبعاد الصورة (Cover)",
                     "value": "cover",
-                    "key": "e9c8ea8f-c5c6-234e-935-3bce269afde4"
+                    "key": "e9c8ea8f-c5c6-434e-9935-3bce269afde4"
                 },
                 {
                     "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
@@ -954,7 +954,9 @@
             "label": "تفعيل شريط الإعلان المتحرك",
             "description": null,
             "value": false,
-            "required": false
+            "required": false,
+            "selected": false,
+            "icon": "sicon-toggle-off"
         },
         {
             "id": "elva_announcement_text",
@@ -963,7 +965,12 @@
             "label": "رسائل الإعلان",
             "description": "افصلي الرسائل بعلامة |. تتوقف الحركة عند مرور المؤشر أو التركيز.",
             "value": "تشكيلة جديدة بانتظارك | اكتشفي أحدث تصاميم ELVA",
-            "required": false
+            "required": false,
+            "icon": "sicon-format-text-alt",
+            "multilanguage": false,
+            "minLength": 0,
+            "maxLength": 500,
+            "placeholder": "أدخل النص هنا..."
         },
         {
             "id": "elva_announcement_url",
@@ -972,7 +979,12 @@
             "label": "رابط الإعلان",
             "description": null,
             "value": "",
-            "required": false
+            "required": false,
+            "icon": "sicon-format-text-alt",
+            "multilanguage": false,
+            "minLength": 0,
+            "maxLength": 1000,
+            "placeholder": "أدخل النص هنا..."
         },
         {
             "id": "elva_countdown_enabled",
@@ -981,7 +993,9 @@
             "label": "تفعيل عداد العرض",
             "description": null,
             "value": false,
-            "required": false
+            "required": false,
+            "selected": false,
+            "icon": "sicon-toggle-off"
         },
         {
             "id": "elva_countdown_title",
@@ -990,7 +1004,12 @@
             "label": "عنوان العرض",
             "description": null,
             "value": "عرض لفترة محدودة",
-            "required": false
+            "required": false,
+            "icon": "sicon-format-text-alt",
+            "multilanguage": false,
+            "minLength": 0,
+            "maxLength": 80,
+            "placeholder": "أدخل النص هنا..."
         },
         {
             "id": "elva_countdown_end",
@@ -999,7 +1018,12 @@
             "label": "موعد انتهاء العرض",
             "description": "اكتبي الموعد بهذا الشكل: 2026-12-31T23:59:00+03:00 (توقيت السعودية). يختفي العرض عند انتهائه.",
             "value": "",
-            "required": false
+            "required": false,
+            "icon": "sicon-format-text-alt",
+            "multilanguage": false,
+            "minLength": 0,
+            "maxLength": 40,
+            "placeholder": "أدخل النص هنا..."
         },
         {
             "id": "elva_countdown_url",
@@ -1008,7 +1032,12 @@
             "label": "رابط العرض",
             "description": null,
             "value": "",
-            "required": false
+            "required": false,
+            "icon": "sicon-format-text-alt",
+            "multilanguage": false,
+            "minLength": 0,
+            "maxLength": 1000,
+            "placeholder": "أدخل النص هنا..."
         },
         {
             "id": "elva_countdown_button",
@@ -1017,7 +1046,12 @@
             "label": "نص زر العرض",
             "description": null,
             "value": "تسوقي العرض",
-            "required": false
+            "required": false,
+            "icon": "sicon-format-text-alt",
+            "multilanguage": false,
+            "minLength": 0,
+            "maxLength": 40,
+            "placeholder": "أدخل النص هنا..."
         },
         {
             "id": "elva_recent_enabled",
@@ -1026,7 +1060,9 @@
             "label": "تفعيل شاهدتِ مؤخراً",
             "description": null,
             "value": true,
-            "required": false
+            "required": false,
+            "selected": true,
+            "icon": "sicon-toggle-off"
         },
         {
             "id": "elva_recent_title",
@@ -1035,7 +1071,12 @@
             "label": "عنوان المنتجات الأخيرة",
             "description": "اتركيه فارغاً لاستخدام عنوان تلقائي حسب لغة المتجر.",
             "value": "",
-            "required": false
+            "required": false,
+            "icon": "sicon-format-text-alt",
+            "multilanguage": false,
+            "minLength": 0,
+            "maxLength": 80,
+            "placeholder": "أدخل النص هنا..."
         }
     ],
     "components": [
