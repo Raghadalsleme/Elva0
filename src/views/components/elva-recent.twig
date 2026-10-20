@@ -1,0 +1,9 @@
+{% if theme.settings.get('elva_recent_enabled', true) %}
+<section class="container s-block elva-recent" hidden data-elva-recent>
+    <header class="elva-recent__head">
+        <h2>{{ theme.settings.get('elva_recent_title', '') ?: trans('blocks.elva.recent_title') }}</h2>
+        <button type="button" data-elva-recent-clear>{{ trans('blocks.elva.recent_clear') }}</button>
+    </header>
+    <div class="elva-recent__list" data-elva-recent-list></div>
+</section>
+{% endif %}

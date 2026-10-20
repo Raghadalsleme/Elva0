@@ -7,6 +7,15 @@
       "download_now": "حمله الان"
     },
     "elva": {
+      "announcement": "إعلانات المتجر",
+      "days": "يوم",
+      "hours": "ساعة",
+      "minutes": "دقيقة",
+      "seconds": "ثانية",
+      "recent_title": "شاهدتِ مؤخراً",
+      "recent_clear": "مسح السجل",
+      "pause_motion": "إيقاف حركة الإعلان",
+
       "quick_view": "عرض سريع",
       "view_details": "عرض التفاصيل الكاملة",
       "close": "إغلاق",

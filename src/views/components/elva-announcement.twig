@@ -1,0 +1,14 @@
+{% if theme.settings.get('elva_announcement_enabled', false) and theme.settings.get('elva_announcement_text', '')|trim %}
+<aside class="elva-announcement" aria-label="{{ trans('blocks.elva.announcement') }}">
+    {% set messages = theme.settings.get('elva_announcement_text', '')|split('|') %}
+    {% set destination = theme.settings.get('elva_announcement_url', '') %}
+    <button type="button" class="elva-announcement__pause" data-elva-ticker-pause aria-pressed="false" aria-label="{{ trans('blocks.elva.pause_motion') }}">Ⅱ</button>
+    {% if destination %}<a href="{{ destination }}" class="elva-announcement__link">{% endif %}
+    <div class="elva-announcement__track">
+        {% for copy in 1..2 %}<div class="elva-announcement__group"{{ copy == 2 ? ' aria-hidden="true"' : '' }}>
+            {% for message in messages %}{% if message|trim %}<span>{{ message|trim }} <b aria-hidden="true">◆</b></span>{% endif %}{% endfor %}
+        </div>{% endfor %}
+    </div>
+    {% if destination %}</a>{% endif %}
+</aside>
+{% endif %}

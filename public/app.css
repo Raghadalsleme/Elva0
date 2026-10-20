@@ -12958,6 +12958,176 @@ body.font-dinnextltarabic-regular .btn--add-to-cart {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+.elva-announcement {
+  background: #4b1d3f;
+  color: #e7dac0;
+  overflow: hidden;
+  font-size: 13px;
+}
+.elva-announcement__link {
+  display: block;
+  color: inherit;
+}
+.elva-announcement__track {
+  display: flex;
+  width: -moz-max-content;
+  width: max-content;
+  direction: ltr;
+  animation: elva-ticker 30s linear infinite;
+}
+.elva-announcement__group {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-shrink: 0;
+  min-width: 100vw;
+}
+.elva-announcement__group span {
+  padding: 10px 28px;
+  white-space: nowrap;
+  direction: rtl;
+}
+.elva-announcement__group b {
+  padding-left: 32px;
+  color: #d8a7b1;
+}
+.elva-announcement:hover .elva-announcement__track, .elva-announcement:focus-within .elva-announcement__track {
+  animation-play-state: paused;
+}
+@keyframes elva-ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.elva-countdown {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #faf6ee;
+  color: #4b1d3f;
+  border-bottom: 1px solid #d8a7b1;
+}
+.elva-countdown[hidden], .elva-recent[hidden] {
+  display: none !important;
+}
+.elva-countdown h2, .elva-recent h2 {
+  font-size: max(18px, min(3vw, 26px));
+}
+.elva-countdown__clock {
+  display: flex;
+  gap: 12px;
+  text-align: center;
+}
+.elva-countdown__clock > div {
+  min-width: 46px;
+}
+.elva-countdown__clock strong {
+  display: block;
+  font-size: 26px;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+.elva-countdown__clock span {
+  display: block;
+  font-size: 11px;
+}
+.elva-countdown__cta {
+  border-bottom: 1px solid currentColor;
+  padding: 6px;
+}
+.elva-recent {
+  padding-bottom: 40px;
+  color: #4b1d3f;
+}
+.elva-recent__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.elva-recent__head button {
+  font-size: 13px;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+.elva-recent__list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(150px, 21%);
+  overflow-x: auto;
+  grid-gap: 18px;
+  gap: 18px;
+  padding-bottom: 16px;
+  scroll-snap-type: x proximity;
+}
+.elva-recent__card {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.elva-recent__card img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background: #faf6ee;
+}
+.elva-recent__card span {
+  font-size: 14px;
+}
+@media (max-width: 640px) {
+  .elva-countdown {
+    gap: 14px;
+  }
+  .elva-countdown h2 {
+    width: 100%;
+    text-align: center;
+  }
+  .elva-recent__list {
+    grid-auto-columns: 44%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .elva-announcement__track {
+    animation: none;
+    width: 100%;
+  }
+  .elva-announcement__group {
+    min-width: 0;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .elva-announcement__group[aria-hidden] {
+    display: none;
+  }
+  .elva-announcement__group span {
+    white-space: normal;
+    text-align: center;
+  }
+}
+.elva-announcement {
+  position: relative;
+  padding-right: 34px;
+}
+.elva-announcement__pause {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 34px;
+  background: #4b1d3f;
+  color: #e7dac0;
+  z-index: 1;
+}
+.elva-announcement.is-paused .elva-announcement__track {
+  animation-play-state: paused;
+}
 .before\:text-orange-300::before{
     content: var(--tw-content);
     --tw-text-opacity: 1;

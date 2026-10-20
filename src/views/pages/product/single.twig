@@ -94,6 +94,9 @@
 #}
 {% extends "layouts.master" %}
 {% block content %}
+    {% if theme.settings.get('elva_recent_enabled', true) %}
+        <span hidden data-elva-current-product data-id="{{ product.id }}" data-name="{{ product.name|e('html_attr') }}" data-url="{{ product.url|e('html_attr') }}" data-image="{{ product.image.url|e('html_attr') }}"></span>
+    {% endif %}
     {% set gallery_layout = theme.settings.get('elva_gallery_layout', 'stack') %}
     {% set has_many_images = product.images|length > 1 %}
     {% set use_stack = gallery_layout == 'stack' and has_many_images %}

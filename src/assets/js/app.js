@@ -1,3 +1,4 @@
+import { initExtras } from './partials/elva-extras';
 import MobileMenu from 'mmenu-light';
 import Swal from 'sweetalert2';
 import Anime from './partials/anime';
@@ -13,6 +14,7 @@ class App extends AppHelpers {
 
   loadTheApp() {
     this.commonThings();
+    initExtras();
     this.initiateNotifier();
     this.initiateMobileMenu();
     if (header_is_sticky) {

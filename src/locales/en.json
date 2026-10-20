@@ -7,6 +7,15 @@
       "download_now": "download now"
     },
     "elva": {
+      "announcement": "Store announcements",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds",
+      "recent_title": "Recently viewed",
+      "recent_clear": "Clear history",
+      "pause_motion": "Pause announcement motion",
+
       "quick_view": "Quick view",
       "view_details": "View full details",
       "close": "Close",

@@ -153,10 +153,13 @@
 </noscript>
 <div class="app-inner flex flex-col min-h-full">
     {% hook 'body:start' %}
+    {% include 'components.elva-announcement' %}
     {% component 'header.header' %}
+    {% include 'components.elva-countdown' %}
     <main id="main-content" role="main"{{ (page.slug == 'product.single' or page.slug starts with 'product.index') ? ' class="flex flex-col space-y-8 sm:space-y-16"' : '' }}>
     {% block content %}{% endblock %}
     </main>
+    {% include 'components.elva-recent' %}
     {% component 'footer.footer' %}
 </div>
 {# ELVA welcome offer: discount code under a scratch foil (theme settings → نافذة كود الخصم) #}

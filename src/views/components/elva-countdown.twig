@@ -1,0 +1,11 @@
+{% if theme.settings.get('elva_countdown_enabled', false) %}
+<section class="elva-countdown" hidden data-elva-countdown data-end="{{ theme.settings.get('elva_countdown_end', '') }}" aria-label="{{ theme.settings.get('elva_countdown_title', '') }}">
+    <h2>{{ theme.settings.get('elva_countdown_title', '') }}</h2>
+    <div class="elva-countdown__clock" role="timer" aria-live="off" dir="ltr">
+        {% for unit in ['days', 'hours', 'minutes', 'seconds'] %}
+        <div><strong data-unit="{{ unit }}">00</strong><span>{{ trans('blocks.elva.' ~ unit) }}</span></div>
+        {% endfor %}
+    </div>
+    {% if theme.settings.get('elva_countdown_url', '') %}<a class="elva-countdown__cta" href="{{ theme.settings.get('elva_countdown_url', '') }}">{{ theme.settings.get('elva_countdown_button', '') }}</a>{% endif %}
+</section>
+{% endif %}

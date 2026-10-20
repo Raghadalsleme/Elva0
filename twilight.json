@@ -939,6 +939,103 @@
             "required": false,
             "value": false,
             "selected": false
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "elva-extras-title",
+            "variant": "h6",
+            "value": "إضافات ELVA: الإعلان والعداد والمنتجات الأخيرة"
+        },
+        {
+            "id": "elva_announcement_enabled",
+            "type": "boolean",
+            "format": "switch",
+            "label": "تفعيل شريط الإعلان المتحرك",
+            "description": null,
+            "value": false,
+            "required": false
+        },
+        {
+            "id": "elva_announcement_text",
+            "type": "string",
+            "format": "text",
+            "label": "رسائل الإعلان",
+            "description": "افصلي الرسائل بعلامة |. تتوقف الحركة عند مرور المؤشر أو التركيز.",
+            "value": "تشكيلة جديدة بانتظارك | اكتشفي أحدث تصاميم ELVA",
+            "required": false
+        },
+        {
+            "id": "elva_announcement_url",
+            "type": "string",
+            "format": "text",
+            "label": "رابط الإعلان",
+            "description": null,
+            "value": "",
+            "required": false
+        },
+        {
+            "id": "elva_countdown_enabled",
+            "type": "boolean",
+            "format": "switch",
+            "label": "تفعيل عداد العرض",
+            "description": null,
+            "value": false,
+            "required": false
+        },
+        {
+            "id": "elva_countdown_title",
+            "type": "string",
+            "format": "text",
+            "label": "عنوان العرض",
+            "description": null,
+            "value": "عرض لفترة محدودة",
+            "required": false
+        },
+        {
+            "id": "elva_countdown_end",
+            "type": "string",
+            "format": "text",
+            "label": "موعد انتهاء العرض",
+            "description": "اكتبي الموعد بهذا الشكل: 2026-12-31T23:59:00+03:00 (توقيت السعودية). يختفي العرض عند انتهائه.",
+            "value": "",
+            "required": false
+        },
+        {
+            "id": "elva_countdown_url",
+            "type": "string",
+            "format": "text",
+            "label": "رابط العرض",
+            "description": null,
+            "value": "",
+            "required": false
+        },
+        {
+            "id": "elva_countdown_button",
+            "type": "string",
+            "format": "text",
+            "label": "نص زر العرض",
+            "description": null,
+            "value": "تسوقي العرض",
+            "required": false
+        },
+        {
+            "id": "elva_recent_enabled",
+            "type": "boolean",
+            "format": "switch",
+            "label": "تفعيل شاهدتِ مؤخراً",
+            "description": null,
+            "value": true,
+            "required": false
+        },
+        {
+            "id": "elva_recent_title",
+            "type": "string",
+            "format": "text",
+            "label": "عنوان المنتجات الأخيرة",
+            "description": "اتركيه فارغاً لاستخدام عنوان تلقائي حسب لغة المتجر.",
+            "value": "",
+            "required": false
         }
     ],
     "components": [
